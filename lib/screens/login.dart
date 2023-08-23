@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             width:
                 MediaQuery.of(context).size.width, // กำหนดความกว้างเต็มหน้าจอ
             child: Image.asset(
-              'assets/images/medical1.jpg',
+              'assets/images/Dog.jpg',
               fit: BoxFit.cover,
             ),
           ),
