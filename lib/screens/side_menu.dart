@@ -45,7 +45,7 @@ class _SideMenuState extends State<SideMenu> {
           ),
           ListTile(
             leading: Icon(
-              Icons.home,
+              Icons.assignment,
               size: 25,
             ),
             title: Text(
@@ -60,7 +60,7 @@ class _SideMenuState extends State<SideMenu> {
           Divider(),
           ListTile(
             leading: Icon(
-              Icons.info,
+              Icons.content_paste_go,
               size: 25,
             ),
             title: Text(
@@ -75,7 +75,7 @@ class _SideMenuState extends State<SideMenu> {
           Divider(),
           ListTile(
             leading: Icon(
-              Icons.contact_mail,
+              Icons.content_paste_search,
               size: 25,
             ),
             title: Text(
