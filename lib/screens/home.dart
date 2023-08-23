@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quickalert/quickalert.dart';
-import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
+import 'package:medicaltoolv2/controller/detail_productcon.dart';
 
+import 'borrowmedicaltool.dart';
+import 'detail_pagev2.dart';
+import 'returnmedicaltool.dart';
 import 'side_menu.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +16,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? result = '';
-
+  String val_search = '';
+  final productlist = Get.put(product_controller());
+  TextEditingController text_find = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,100 +44,149 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        actions: [
-          Row(
-            children: [
-              // IconButton(
-              //   onPressed: () {
-              //     // getPharinfo('8904093808111', 'IPD');
-              //   },
-              //   icon: const Icon(Icons.abc),
-              // ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.qr_code,
-                    size: 40,
-                    color: Colors.amberAccent,
-                  ),
-                  onPressed: () async {
-                    var res = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const SimpleBarcodeScannerPage(),
-                        ));
-                    setState(() {
-                      if (res is String) {
-                        // productlist.fectfindproduct(res);
-                        // getproductinfo(res);
-                        QuickAlert.show(
-                          context: context,
-                          type: QuickAlertType.success,
-                          text: '${res}',
-                        );
-                      }
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
-        ],
       ),
       body: SingleChildScrollView(
-        child: Align(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 200,
+        child: Column(
+          children: [
+            SizedBox(height: 50),
+            Container(
+              width: 180,
+              height: 180,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 94, 93, 94),
+                borderRadius: BorderRadius.circular(10), // ขอบมน
               ),
-              SizedBox(
-                width: 250,
-                child: ElevatedButton(
-                  child: Row(
-                    children: [
-                      Icon(Icons.qr_code), // Add your icon here
-                      SizedBox(
-                          width: 8), // Add some space between the icon and text
-                      Text(
-                        "Scanned QR Code",
-                        style: TextStyle(fontSize: 20, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                  onPressed: () async {
-                    var res = await Navigator.push(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10), // ขอบมน
+                child: Image.asset(
+                  'assets/images/Doctor1.jpg',
+                  width: 180,
+                  height: 180,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const SimpleBarcodeScannerPage(),
-                        ));
-                    setState(() {
-                      if (res is String) {
-                        result = res;
-                        QuickAlert.show(
-                          context: context,
-                          type: QuickAlertType.success,
-                          title: 'Data Scan ',
-                          text: result,
-                          confirmBtnText: 'OK',
-                        );
-                      }
-                    });
-                  },
+                            builder: (context) => BorrowMedicalTool()),
+                      );
+                    },
+                    child: Container(
+                      height: 120,
+                      width: 120,
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 94, 93, 94),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.rotate_right,
+                            color: Colors.yellow,
+                            size: 48,
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            "ยืมเครื่องมือแพทย์",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ReturnMedicalTool()),
+                      );
+                    },
+                    child: Container(
+                      height: 120,
+                      width: 120,
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 94, 93, 94),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.content_paste_go,
+                            color: Colors.yellow,
+                            size: 48,
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            "คืนเครื่องมือแพทย์",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Detailv2()),
+                );
+              },
+              child: Container(
+                height: 120,
+                width: MediaQuery.of(context).size.width * 0.6,
+                margin: EdgeInsets.all(10), // ระยะห่างรอบๆ Container
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 94, 93, 94),
+                  borderRadius: BorderRadius.circular(10), // ขอบมน
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.content_paste_search,
+                      color: Colors.yellow,
+                      size: 48,
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      "ข้อมูลอุปกรณ์",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
-              Center(
-                child: Text(
-                  'SacanResult: $result',
-                  style: const TextStyle(fontSize: 10),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -146,3 +199,4 @@ class _HomePageState extends State<HomePage> {
 //     home: HomePage(),
 //   ));
 // }
+

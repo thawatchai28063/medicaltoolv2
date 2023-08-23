@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import 'home.dart';
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -19,22 +17,24 @@ class _LoginPageState extends State<LoginPage> {
       //   title: Text('L O G I N P A G E'),
       //   backgroundColor: Colors.blue,
       // ),
+
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                    'https://a-static.besthdwallpaper.com/3d-colorful-apple-logo-wallpaper-2048x1152-109015_49.jpg'),
-                fit: BoxFit.cover,
-              ),
+            height:
+                MediaQuery.of(context).size.height, // กำหนดความสูงเต็มหน้าจอ
+            width:
+                MediaQuery.of(context).size.width, // กำหนดความกว้างเต็มหน้าจอ
+            child: Image.asset(
+              'assets/images/medical1.jpg',
+              fit: BoxFit.cover,
             ),
           ),
           ListView(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             children: [
               SizedBox(
-                height: 50,
+                height: 30,
               ),
               Container(
                 height: 350,
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(
-                height: 15,
+                height: 30,
               ),
               Container(
                 width: 20,

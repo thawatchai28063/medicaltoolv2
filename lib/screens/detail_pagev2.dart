@@ -123,131 +123,14 @@ class _Detailv2State extends State<Detailv2> {
                               ),
                             ),
                             SizedBox(height: 5),
-                            Image.network(
-                              'https://www.squat.in.th/wp-content/uploads/2021/05/Doctor-Online-02.jpg', // Replace with your image URL
+                            Image.asset(
+                              'assets/images/Doctor1.jpg', // Replace with your image URL
                               width: 250,
                               height: 250,
                             ),
                           ],
                         ),
                       )
-                    // : SingleChildScrollView(
-                    //     child: Container(
-                    //       alignment: Alignment.center,
-                    //       padding: EdgeInsets.all(35),
-                    //       decoration: BoxDecoration(
-                    //         color: Color.fromARGB(255, 209, 207, 202),
-                    //         border:
-                    //             Border.all(width: 1.6, color: Colors.black12),
-                    //         borderRadius: BorderRadius.all(Radius.circular(20)),
-                    //       ),
-                    //       child: Column(
-                    //         children: [
-                    //           Text('SacanResult'),
-                    //           Text(
-                    //             'แผนก  :',
-                    //             style: TextStyle(
-                    //                 color: Colors.black,
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.bold),
-                    //           ),
-                    //           Text(
-                    //             productlist.listproduct[0].mdcDep.toString(),
-                    //             style:
-                    //                 TextStyle(color: Colors.red, fontSize: 15),
-                    //           ),
-                    //           Text(
-                    //             'ชื่ออุปกรณ์   :',
-                    //             style: TextStyle(
-                    //                 color: Colors.black,
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.bold),
-                    //           ),
-                    //           Text(
-                    //             productlist.listproduct[0].mdcName.toString(),
-                    //             style:
-                    //                 TextStyle(color: Colors.red, fontSize: 15),
-                    //             textAlign: TextAlign.center,
-                    //           ),
-                    //           Text(
-                    //             'CD  :',
-                    //             style: TextStyle(
-                    //                 color: Colors.black,
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.bold),
-                    //           ),
-                    //           Text(
-                    //             productlist.listproduct[0].mdcCd.toString(),
-                    //             style:
-                    //                 TextStyle(color: Colors.red, fontSize: 15),
-                    //           ),
-                    //           Text(
-                    //             'Equipment :',
-                    //             style: TextStyle(
-                    //                 color: Colors.black,
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.bold),
-                    //           ),
-                    //           Text(
-                    //             productlist.listproduct[0].mdcEquipment
-                    //                 .toString(),
-                    //             style:
-                    //                 TextStyle(color: Colors.red, fontSize: 15),
-                    //           ),
-                    //           Text(
-                    //             'ยี่ฮ้อ   :',
-                    //             style: TextStyle(
-                    //                 color: Colors.black,
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.bold),
-                    //           ),
-                    //           Text(
-                    //             productlist.listproduct[0].mdcYeeho.toString(),
-                    //             style:
-                    //                 TextStyle(color: Colors.red, fontSize: 15),
-                    //           ),
-                    //           Text(
-                    //             'อาคาร',
-                    //             style: TextStyle(
-                    //                 color: Colors.black,
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.bold),
-                    //           ),
-                    //           Text(
-                    //             productlist.listproduct[0].mdcUbr.toString(),
-                    //             style:
-                    //                 TextStyle(color: Colors.red, fontSize: 15),
-                    //           ),
-                    //           Text(
-                    //             'พื้นที่   :',
-                    //             style: TextStyle(
-                    //                 color: Colors.black,
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.bold),
-                    //           ),
-                    //           Text(
-                    //             productlist.listproduct[0].mdcLocation
-                    //                 .toString(),
-                    //             style:
-                    //                 TextStyle(color: Colors.red, fontSize: 15),
-                    //           ),
-                    //           Text(
-                    //             'last    :',
-                    //             style: TextStyle(
-                    //                 color: Colors.black,
-                    //                 fontSize: 20,
-                    //                 fontWeight: FontWeight.bold),
-                    //           ),
-                    //           Text(
-                    //             productlist.listproduct[0].mdcCostlast
-                    //                 .toString(),
-                    //             style:
-                    //                 TextStyle(color: Colors.red, fontSize: 15),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
                     : SingleChildScrollView(
                         child: Container(
                           alignment: Alignment.center,
