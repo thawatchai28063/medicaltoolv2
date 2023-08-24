@@ -103,7 +103,7 @@ class _SideMenuState extends State<SideMenu> {
               size: 25,
             ),
             title: Text(
-              'ตั่งค่า',
+              'ตั้งค่า',
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {

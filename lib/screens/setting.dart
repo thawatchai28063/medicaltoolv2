@@ -29,7 +29,7 @@ class _SetTingPageState extends State<SetTingPage> {
                 width: 10,
               ),
               const Text(
-                'S E T T I N G',
+                'ตั้ ง ค่ า',
                 style: TextStyle(fontSize: 20),
               ),
             ],
