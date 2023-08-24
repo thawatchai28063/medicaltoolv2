@@ -22,13 +22,19 @@ class _SideMenuState extends State<SideMenu> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text(
-              'นายสุนัข จรจัด',
-              style: TextStyle(color: Colors.black),
+            accountName: Container(
+              color: Colors.yellow, // กำหนดสีพื้นหลังเป็นสีขาว
+              child: Text(
+                'นายสุนัข จรจัด',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
-            accountEmail: Text(
-              'Doggy1234@gmail.com',
-              style: TextStyle(color: Colors.black),
+            accountEmail: Container(
+              color: Colors.yellow, // กำหนดสีพื้นหลังเป็นสีขาว
+              child: Text(
+                'Doggy1234@gmail.com',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             decoration: BoxDecoration(
               image: DecorationImage(
