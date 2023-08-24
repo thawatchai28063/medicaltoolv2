@@ -153,11 +153,12 @@ class _Detailv2State extends State<Detailv2> {
                                     value:
                                         '', // ไม่ต้องใส่ข้อมูลที่ value เนื่องจากจะแสดงภาพที่แทนที่ได้
                                   ),
-                                  Divider(),
+                                  // Divider(),
                                   Container(
                                     alignment: Alignment.center,
                                     child: Image.network(
                                       'https://media.oknation.net/uploads/201311/26/671313687.jpg', // เปลี่ยนเป็น URL ของรูปภาพที่ต้องการแสดง
+                                      // productlist.listproduct[0].imageUrl,
                                       width: MediaQuery.of(context).size.width *
                                           0.8, // ปรับความกว้างของรูปภาพ
                                       fit: BoxFit.contain,

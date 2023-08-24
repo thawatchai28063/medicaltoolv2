@@ -24,20 +24,23 @@ class _SideMenuState extends State<SideMenu> {
           UserAccountsDrawerHeader(
             accountName: Text(
               'นายสุนัข จรจัด',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
             accountEmail: Text(
               'Doggy1234@gmail.com',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"),
-                    fit: BoxFit.cover)),
+              image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/tool.jpg", // ตำแหน่งของรูปภาพในทรัพยากร
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
             currentAccountPicture: CircleAvatar(
               child: Image.asset(
-                "assets/images/Logo3.png",
+                "assets/images/Logo3.png", // ตำแหน่งของรูปภาพในทรัพยากร
                 fit: BoxFit.cover,
               ),
               backgroundColor: Colors.transparent, // เปลี่ยนเป็นสีโปร่งใส
