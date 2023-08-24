@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:medicaltoolv2/screens/setting.dart';
 
 import 'borrowmedicaltool.dart';
-import 'detail_page.dart';
 import 'detail_pagev2.dart';
 import 'login.dart';
 import 'returnmedicaltool.dart';
@@ -21,35 +20,36 @@ class _SideMenuState extends State<SideMenu> {
       backgroundColor: Color.fromARGB(255, 161, 155, 157),
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-            accountName: Container(
-              color: Colors.yellow, // กำหนดสีพื้นหลังเป็นสีขาว
-              child: Text(
-                'นายสุนัข จรจัด',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            accountEmail: Container(
-              color: Colors.yellow, // กำหนดสีพื้นหลังเป็นสีขาว
-              child: Text(
-                'Doggy1234@gmail.com',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/tool.jpg", // ตำแหน่งของรูปภาพในทรัพยากร
+          Container(
+            child: UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                child: Image.asset(
+                  "assets/images/Logo3.png", // ตำแหน่งของรูปภาพในทรัพยากร
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
+                backgroundColor: Colors.transparent, // เปลี่ยนเป็นสีโปร่งใส
               ),
-            ),
-            currentAccountPicture: CircleAvatar(
-              child: Image.asset(
-                "assets/images/Logo3.png", // ตำแหน่งของรูปภาพในทรัพยากร
-                fit: BoxFit.cover,
+              accountName: Container(
+                child: Text(
+                  'นายสุนัข จรจัด',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              backgroundColor: Colors.transparent, // เปลี่ยนเป็นสีโปร่งใส
+              accountEmail: Container(
+                // color: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาว
+                child: Text(
+                  'Doggy1234@gmail.com',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/images/img11.jpg", // ตำแหน่งของรูปภาพในทรัพยากร
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
           ListTile(

@@ -157,7 +157,7 @@ class _Detailv2State extends State<Detailv2> {
                                   Container(
                                     alignment: Alignment.center,
                                     child: Image.network(
-                                      'https://media.oknation.net/uploads/201311/26/671313687.jpg', // เปลี่ยนเป็น URL ของรูปภาพที่ต้องการแสดง
+                                      'https://itp1.itopfile.com/ImageServer/4126d2c0cf8328a2/0/0/terumoLM835z-z834018553741.webp', // เปลี่ยนเป็น URL ของรูปภาพที่ต้องการแสดง
                                       // productlist.listproduct[0].imageUrl,
                                       width: MediaQuery.of(context).size.width *
                                           0.8, // ปรับความกว้างของรูปภาพ

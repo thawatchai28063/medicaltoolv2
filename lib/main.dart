@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medicaltoolv2/screens/detail_page.dart';
 import 'package:medicaltoolv2/screens/product_detail.dart';
-import 'package:medicaltoolv2/screens/testval.dart';
+
 import 'screens/borrowmedicaltool.dart';
 import 'screens/detail_pagev2.dart';
 import 'screens/home.dart';

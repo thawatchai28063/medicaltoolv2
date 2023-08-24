@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 50),
             Container(
               width: 180,
-              height: 180,
+              height: 140,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 94, 93, 94),
                 borderRadius: BorderRadius.circular(10), // ขอบมน
@@ -59,14 +59,14 @@ class _HomePageState extends State<HomePage> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10), // ขอบมน
                 child: Image.asset(
-                  'assets/images/Doctor1.jpg',
+                  'assets/images/termomiter1.JPG',
                   width: 180,
-                  height: 180,
-                  fit: BoxFit.cover,
+                  height: 140,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: Container(
                 height: 120,
-                width: MediaQuery.of(context).size.width * 0.6,
+                width: MediaQuery.of(context).size.width * 0.95,
                 margin: EdgeInsets.all(10), // ระยะห่างรอบๆ Container
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 94, 93, 94),
