@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const Text(
               'M E D I C A L T O O L',
-              style: TextStyle(fontSize: 10),
+              style: TextStyle(fontSize: 20),
             ),
           ],
         ),
