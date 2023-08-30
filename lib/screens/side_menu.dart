@@ -31,7 +31,7 @@ class _SideMenuState extends State<SideMenu> {
               ),
               accountName: Container(
                 child: Text(
-                  'นายสุนัข จรจัด',
+                  'นายกล้าหาญ ชอบตายก่อน',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

@@ -421,32 +421,6 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                               Future<String?> success = insert();
                               print('success$success');
                               setState(() {});
-                              // if (formkey.currentState!.validate()) {
-                              //   // String? success = await insertDataToApi();
-
-                              //   if (success != '') {
-                              //     ScaffoldMessenger.of(context).showSnackBar(
-                              //       const SnackBar(
-                              //         content: Text('บันทึกสำเร็จ'),
-                              //       ),
-                              //     );
-
-                              //     // เมื่อบันทึกสำเร็จ ให้เปลี่ยนหน้าไปยัง HomePage
-                              //     Navigator.push(
-                              //       context,
-                              //       MaterialPageRoute(
-                              //         builder: (context) => const HomePage(),
-                              //       ),
-                              //     );
-                              //   } else {
-                              //     ScaffoldMessenger.of(context).showSnackBar(
-                              //       const SnackBar(
-                              //         content:
-                              //             Text('เกิดข้อผิดพลาดในการบันทึก'),
-                              //       ),
-                              //     );
-                              //   }
-                              // }
                             },
                           ))
                         ],
