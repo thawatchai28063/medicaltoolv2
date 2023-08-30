@@ -28,7 +28,7 @@ class _SetTingPageState extends State<SetTingPage> {
               ),
               const Text(
                 'ตั้ ง ค่า',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 30),
               ),
             ],
           ),

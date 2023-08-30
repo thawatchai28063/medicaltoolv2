@@ -180,14 +180,14 @@ class _Detailv2State extends State<Detailv2> {
                                   ),
                                   Divider(),
                                   InfoRow(
-                                    title: 'CD :',
+                                    title: 'หมายเลขเครื่อง:',
                                     value: productlist.listproduct[0].mdcCd
                                         .toString(),
                                     // isCentered: true,
                                   ),
                                   Divider(),
                                   InfoRow(
-                                    title: 'Equipment:',
+                                    title: 'อุปกรณ์:',
                                     value: productlist
                                         .listproduct[0].mdcEquipment
                                         .toString(),
@@ -217,7 +217,7 @@ class _Detailv2State extends State<Detailv2> {
                                   ),
                                   Divider(),
                                   InfoRow(
-                                    title: 'last:',
+                                    title: 'สถานภาพสินทรัพย์:',
                                     value: productlist
                                         .listproduct[0].mdcCostlast
                                         .toString(),
