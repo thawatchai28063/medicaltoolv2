@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
-
+import 'package:animated_floating_buttons/animated_floating_buttons.dart';
 import '../controller/detail_productcon.dart';
+import 'borrowmedicaltool.dart';
+import 'returnmedicaltool.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:floating_action_bubble/floating_action_bubble.dart';
+
+final storage = GetStorage();
 
 class Detailv2 extends StatefulWidget {
   const Detailv2({super.key});
@@ -14,6 +20,15 @@ class Detailv2 extends StatefulWidget {
 
 class _Detailv2State extends State<Detailv2> {
   String val_search = ''; // Initialize val_search
+  // String? mdcDep = storage.read('mdcDep');
+  // String? mdcName = storage.read('mdcName');
+  // String? mdcCd = storage.read('mdcCd');
+  // String? mdcEquipment = storage.read('mdcEquipment');
+  // String? mdcYeeho = storage.read('mdcYeeho');
+  // String? mdcUbr = storage.read('mdcUbr');
+  // String? mdcLocation = storage.read('mdcLocation');
+  // String? mdcCostlast = storage.read('mdcCostlast');
+
   final productlist = Get.put(product_controller());
   TextEditingController text_find = TextEditingController();
   @override
@@ -90,6 +105,7 @@ class _Detailv2State extends State<Detailv2> {
                         val_search = res;
                         productlist.listproduct.clear();
                         productlist.fectfindproduct(res);
+
                         QuickAlert.show(
                           context: context,
                           type: QuickAlertType.success,
@@ -134,7 +150,7 @@ class _Detailv2State extends State<Detailv2> {
                     : SingleChildScrollView(
                         child: Container(
                           alignment: Alignment.center,
-                          padding: EdgeInsets.all(35),
+                          padding: EdgeInsets.all(5),
                           child: Card(
                             elevation: 4,
                             shape: RoundedRectangleBorder(
@@ -231,6 +247,10 @@ class _Detailv2State extends State<Detailv2> {
                                     // isCentered: true,
                                   ),
                                   Divider(),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Divider(),
                                 ],
                               ),
                             ),
@@ -241,6 +261,47 @@ class _Detailv2State extends State<Detailv2> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: AnimatedFloatingActionButton(
+        fabButtons: <Widget>[
+          // ปุ่มแรก
+          Builder(
+            builder: (context) => FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        BorrowMedicalTool(), // หน้าปลายทางที่คุณต้องการเด้งไป
+                  ),
+                );
+              },
+              tooltip: 'ยืม',
+              child: Icon(Icons.assignment),
+            ),
+          ),
+          // ปุ่มที่สอง
+          Builder(
+            builder: (context) => FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ReturnMedicalTool(), // หน้าปลายทางที่คุณต้องการเด้งไป
+                  ),
+                );
+              },
+              tooltip: 'คืน',
+              child: Icon(Icons.content_paste_go),
+            ),
+          ),
+          // สามารถเพิ่มปุ่มอื่น ๆ เพิ่มเติมได้ตามต้องการ
+        ],
+        colorStartAnimation: Colors.blue,
+        colorEndAnimation: Colors.red,
+        animatedIconData:
+            AnimatedIcons.menu_close, // เปลี่ยนเป็นไอคอนที่คุณต้องการ
       ),
     );
   }

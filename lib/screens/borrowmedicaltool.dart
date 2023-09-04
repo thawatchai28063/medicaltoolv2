@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:medicaltoolv2/screens/detail_pagev2.dart';
 import 'package:medicaltoolv2/utility/api_domain.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'home.dart';
+
+final storage = GetStorage();
 
 class BorrowMedicalTool extends StatefulWidget {
   const BorrowMedicalTool({super.key});
@@ -18,56 +24,75 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
 
   TextEditingController mdc_name = TextEditingController();
   TextEditingController mdc_dep = TextEditingController();
-  TextEditingController mdc_cd = TextEditingController();
+  TextEditingController mdc_id = TextEditingController();
   TextEditingController mdc_run = TextEditingController();
-  TextEditingController mdc_producer = TextEditingController();
-  TextEditingController mdc_durable_articles = TextEditingController();
+  TextEditingController mdc_yeeho = TextEditingController();
+  TextEditingController mdc_cd = TextEditingController();
   TextEditingController mdc_reason = TextEditingController();
   TextEditingController mdc_sendem_name = TextEditingController();
   TextEditingController mdc_sendem_cd = TextEditingController();
   TextEditingController mdc_receiveem_name = TextEditingController();
   TextEditingController mdc_receiveem_cd = TextEditingController();
   TextEditingController mdc_now = TextEditingController();
+  TextEditingController mdc_date_return = TextEditingController();
 
-  DateTime _selectedDateTime = DateTime.now();
-  Future<void> _selectDate(BuildContext context) async {
+  DateTime? _selectedBorrowDate;
+  DateTime? _selectedReturnDate;
+
+  @override
+  void initState() {
+    super.initState();
+    getdata();
+  }
+
+  Future<void> getdata() async {
+    mdc_name.text = storage.read('mdcName') ?? '';
+    //mdc_name.text = 'TEst';
+    print('mdc_name$mdc_name');
+    mdc_dep.text = storage.read('mdcDep') ?? '';
+    mdc_id.text = storage.read('mdcUbr') ?? '';
+    mdc_run.text = ''; //storage.read('mdcName') ?? '';
+    mdc_yeeho.text = storage.read('mdcYeeho') ?? '';
+    mdc_cd.text = storage.read('mdcCd') ?? '';
+    // mdc_reason.text = storage.read('mdcCd') ?? '';
+    // mdc_sendem_name.text = storage.read('mdcCd') ?? '';
+    // mdc_sendem_cd.text = storage.read('mdcCd') ?? '';
+    // mdc_receiveem_name.text =  storage.read('mdcCd') ?? '';
+    // mdc_receiveem_cd.text = storage.read('mdcCd') ?? '';
+    // mdc_now.text = '';
+    // mdc_date_return.text = '';
+  }
+
+  Future<void> _selectBorrowDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: _selectedDateTime,
+      initialDate: _selectedBorrowDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
 
-    if (pickedDate != null && pickedDate != _selectedDateTime) {
+    if (pickedDate != null && pickedDate != _selectedBorrowDate) {
       setState(() {
-        _selectedDateTime = DateTime(
-          pickedDate.year,
-          pickedDate.month,
-          pickedDate.day,
-          _selectedDateTime.hour,
-          _selectedDateTime.minute,
-        );
-        mdc_now.text = _selectedDateTime.toLocal().toString().substring(0, 16);
+        _selectedBorrowDate = pickedDate;
+        mdc_now.text =
+            DateFormat('yyyy-MM-dd').format(pickedDate); // อัปเดตค่าใน mdc_now
       });
     }
   }
 
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? pickedTime = await showTimePicker(
+  Future<void> _selectReturnDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialTime: TimeOfDay.fromDateTime(_selectedDateTime),
+      initialDate: _selectedReturnDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
     );
 
-    if (pickedTime != null) {
+    if (pickedDate != null && pickedDate != _selectedReturnDate) {
       setState(() {
-        _selectedDateTime = DateTime(
-          _selectedDateTime.year,
-          _selectedDateTime.month,
-          _selectedDateTime.day,
-          pickedTime.hour,
-          pickedTime.minute,
-        );
-        mdc_now.text = _selectedDateTime.toLocal().toString().substring(0, 16);
+        _selectedReturnDate = pickedDate;
+        mdc_date_return.text = DateFormat('yyyy-MM-dd')
+            .format(pickedDate); // อัปเดตค่าใน mdc_return
       });
     }
   }
@@ -95,6 +120,28 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const Text(
+                      "ครุภัณฑ์:",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'กรุณากรอกครุภัณฑ์',
+                        contentPadding: const EdgeInsets.all(20.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                      controller: mdc_cd,
+                      validator: ((value) {
+                        if (value!.isEmpty) {
+                          return 'กรุณากรอกครุภัณฑ์';
+                        }
+                        return null;
+                      }),
+                      keyboardType: TextInputType.text,
+                      autocorrect: false,
+                    ),
                     const Text(
                       "ชื่อเครื่องมือ:",
                       style: TextStyle(fontSize: 20),
@@ -157,7 +204,7 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
-                      controller: mdc_cd,
+                      controller: mdc_id,
                       validator: ((value) {
                         if (value!.isEmpty) {
                           return 'กรุณากรอกหมายเลขเครื่อง';
@@ -207,7 +254,7 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
-                      controller: mdc_producer,
+                      controller: mdc_yeeho,
                       validator: ((value) {
                         if (value!.isEmpty) {
                           return 'กรุณากรอกชื่อผู้ผลิต';
@@ -219,28 +266,6 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                     ),
                     const SizedBox(
                       height: 5,
-                    ),
-                    const Text(
-                      "ครุภัณฑ์:",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'กรุณากรอกครุภัณฑ์',
-                        contentPadding: const EdgeInsets.all(20.0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      controller: mdc_durable_articles,
-                      validator: ((value) {
-                        if (value!.isEmpty) {
-                          return 'กรุณากรอกครุภัณฑ์';
-                        }
-                        return null;
-                      }),
-                      keyboardType: TextInputType.text,
-                      autocorrect: false,
                     ),
                     const SizedBox(
                       height: 5,
@@ -327,6 +352,11 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                             keyboardType: TextInputType.text,
                             autocorrect: false,
                           ),
+                          Text(
+                            "เจ้าหน้าที่แผนก",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                           const Text(
                             "ชื่อผู้รับ",
                             style: TextStyle(fontSize: 20),
@@ -372,8 +402,10 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                             autocorrect: false,
                           ),
                           Text(
-                            'Selected Date and Time: ${mdc_now.text ?? "No date and time selected"}',
-                            style: const TextStyle(fontSize: 20),
+                            'วันที่ยืม: ${mdc_now.text ?? "กรุณาเลือกวันที่ยืม"}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
                           SizedBox(
                             child: Row(
@@ -382,15 +414,56 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                                   width: 5,
                                 ),
                                 ElevatedButton(
-                                  onPressed: () => _selectDate(context),
-                                  child: const Text('Select Date'),
+                                  onPressed: () => _selectBorrowDate(context),
+                                  child: Row(
+                                    children: [
+                                      Icon(CupertinoIcons.calendar,
+                                          color: Colors
+                                              .red), // ใช้ไอคอนจาก CupertinoIcons
+                                      const SizedBox(
+                                          width:
+                                              5), // ระยะห่างระหว่างไอคอนและข้อความ
+                                      const Text(
+                                        'เลือกวันที่ยืม ',
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 5,
                                 ),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            'กำหนดวันที่คืน: ${mdc_date_return.text ?? "กรุณาเลือกวันที่คืน"}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 5,
+                                ),
                                 ElevatedButton(
-                                  onPressed: () => _selectTime(context),
-                                  child: const Text('Select Time'),
+                                  onPressed: () => _selectReturnDate(context),
+                                  child: Row(
+                                    children: [
+                                      Icon(CupertinoIcons.calendar,
+                                          color: Colors
+                                              .red), // ใช้ไอคอนจาก CupertinoIcons
+                                      const SizedBox(
+                                          width:
+                                              5), // ระยะห่างระหว่างไอคอนและข้อความ
+                                      const Text(
+                                        'เลือกวันที่คืน ',
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 5,
@@ -440,25 +513,30 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
     Map<String, String> queryParam = {
       'mdc_name': mdc_name.text,
       'mdc_dep': mdc_dep.text,
-      'mdc_cd': mdc_cd.text,
+      'mdc_id': mdc_id.text,
       'mdc_run': mdc_run.text,
-      'mdc_producer': mdc_producer.text,
-      'mdc_durable_articles': mdc_durable_articles.text,
+      'mdc_yeeho': mdc_yeeho.text,
+      'mdc_cd': mdc_cd.text,
       'mdc_reason': mdc_reason.text,
       'mdc_sendem_name': mdc_sendem_name.text,
       'mdc_sendem_cd': mdc_sendem_cd.text,
       'mdc_receiveem_name': mdc_receiveem_name.text,
       'mdc_receiveem_cd': mdc_receiveem_cd.text,
-      'mdc_now': _selectedDateTime.toLocal().toString().substring(0, 16),
+      'mdc_now': _selectedBorrowDate != null
+          ? DateFormat('yyyy-MM-dd 00:00:00').format(_selectedBorrowDate!)
+          : "",
+      'mdc_date_return': _selectedReturnDate != null
+          ? DateFormat('yyyy-MM-dd 00:00:00').format(_selectedReturnDate!)
+          : "",
     };
 
     var respon = await http.get(
-      Uri.https(apidomain, apiinsertproduct, queryParam),
+      Uri.http(apiin, apiinsert, queryParam),
     );
-    // print('response=$apidomain$apiinsertproduct$queryParam');
+    print('response=$apiin$apiinsert$queryParam');
     if (respon.statusCode == 200) {
       var jsonString = respon.body.toString().trim();
-      //print(jsonString);
+      print(jsonString);
       if (jsonString == "OK") {
         QuickAlert.show(
             context: context,
@@ -470,5 +548,6 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
             });
       }
     }
+    return null;
   }
 }

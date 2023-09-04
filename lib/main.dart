@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medicaltoolv2/screens/detail_page.dart';
 import 'package:medicaltoolv2/screens/product_detail.dart';
-
+import 'package:get_storage/get_storage.dart';
 import 'screens/borrowmedicaltool.dart';
 import 'screens/detail_pagev2.dart';
 import 'screens/home.dart';
 import 'screens/login.dart';
 import 'screens/returnmedicaltool.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-
+  final storage = GetStorage();
   List<GetPage> getpageList = [
     GetPage(
       name: '/',
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    String initialPage = '/login';
+    String initialPage = '/detail';
     return GetMaterialApp(
       title: 'Medicaltool',
       debugShowCheckedModeBanner: false,

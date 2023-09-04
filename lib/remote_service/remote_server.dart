@@ -17,11 +17,11 @@ class RemoteService {
     // print(apidomain);
     // print(respon);
 
-    print('statusCode' + respon.statusCode.toString());
+    //  print('statusCode' + respon.statusCode.toString());
     if (respon.statusCode == 200) {
       var jsonString = respon.body;
       if (jsonString != 'null') {
-        print(jsonString);
+        //print(jsonString);
         return mdcModelFromJson(jsonString);
       } else {
         return null;
