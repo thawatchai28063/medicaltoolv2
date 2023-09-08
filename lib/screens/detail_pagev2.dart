@@ -7,7 +7,6 @@ import '../controller/detail_productcon.dart';
 import 'borrowmedicaltool.dart';
 import 'returnmedicaltool.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 
 final storage = GetStorage();
 
@@ -169,21 +168,32 @@ class _Detailv2State extends State<Detailv2> {
                                     value:
                                         '', // ไม่ต้องใส่ข้อมูลที่ value เนื่องจากจะแสดงภาพที่แทนที่ได้
                                   ),
-                                  // Divider(),
+                                  Divider(),
+                                  // Container(
+                                  //   alignment: Alignment.center,
+                                  //   child: Image.network(
+                                  //     // 'assets/images/tool2.jpg',
+                                  //     'https://itp1.itopfile.com/ImageServer/4126d2c0cf8328a2/0/0/terumoLM835z-z834018553741.webp', // เปลี่ยนเป็น URL ของรูปภาพที่ต้องการแสดง
+                                  //     // productlist.listproduct[0].imageUrl,
+                                  //     width: MediaQuery.of(context).size.width *
+                                  //         0.8, // ปรับความกว้างของรูปภาพ
+                                  //     fit: BoxFit.contain,
+                                  //   ),
+                                  // ),
                                   Container(
                                     alignment: Alignment.center,
-                                    child: Image.network(
-                                      'https://itp1.itopfile.com/ImageServer/4126d2c0cf8328a2/0/0/terumoLM835z-z834018553741.webp', // เปลี่ยนเป็น URL ของรูปภาพที่ต้องการแสดง
-                                      // productlist.listproduct[0].imageUrl,
+                                    child: Image.asset(
+                                      'assets/images/tool2.JPG', // เปลี่ยนเป็นที่อยู่ของรูปภาพใน assets ของคุณ
                                       width: MediaQuery.of(context).size.width *
                                           0.8, // ปรับความกว้างของรูปภาพ
                                       fit: BoxFit.contain,
                                     ),
                                   ),
+
                                   Divider(),
                                   InfoRow(
-                                    title: 'แผนก:',
-                                    value: productlist.listproduct[0].mdcDep
+                                    title: 'ครุภัณฑ์:',
+                                    value: productlist.listproduct[0].mdcCd
                                         .toString(),
                                     // isCentered: true,
                                   ),
@@ -195,13 +205,7 @@ class _Detailv2State extends State<Detailv2> {
                                     // isCentered: true,
                                   ),
                                   Divider(),
-                                  InfoRow(
-                                    title: 'หมายเลขเครื่อง:',
-                                    value: productlist.listproduct[0].mdcCd
-                                        .toString(),
-                                    // isCentered: true,
-                                  ),
-                                  Divider(),
+
                                   InfoRow(
                                     title: 'อุปกรณ์:',
                                     value: productlist
@@ -211,8 +215,29 @@ class _Detailv2State extends State<Detailv2> {
                                   ),
                                   Divider(),
                                   InfoRow(
+                                    title: 'หมายเลขเครื่อง:',
+                                    value: productlist.listproduct[0].mdcDoc
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'รุ่น:',
+                                    value: productlist.listproduct[0].mdcRun
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
                                     title: 'ยี่ฮ้อ:',
                                     value: productlist.listproduct[0].mdcYeeho
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'แผนก:',
+                                    value: productlist.listproduct[0].mdcDep
                                         .toString(),
                                     // isCentered: true,
                                   ),
@@ -233,6 +258,13 @@ class _Detailv2State extends State<Detailv2> {
                                   ),
                                   Divider(),
                                   InfoRow(
+                                    title: 'ราคาที่ซื้อ:',
+                                    value: productlist.listproduct[0].mdcPrice
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
                                     title: 'สถานภาพสินทรัพย์:',
                                     value: productlist
                                         .listproduct[0].mdcCostlast
@@ -240,13 +272,7 @@ class _Detailv2State extends State<Detailv2> {
                                     // isCentered: true,
                                   ),
                                   Divider(),
-                                  InfoRow(
-                                    title: 'ชื่ออุปกรณ์:',
-                                    value: productlist.listproduct[0].mdcName
-                                        .toString(),
-                                    // isCentered: true,
-                                  ),
-                                  Divider(),
+
                                   SizedBox(
                                     height: 30,
                                   ),

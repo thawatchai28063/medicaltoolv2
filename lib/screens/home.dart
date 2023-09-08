@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medicaltoolv2/controller/detail_productcon.dart';
-
-import 'borrowmedicaltool.dart';
+import 'borrowmedicaltool1.dart';
 import 'detail_pagev2.dart';
+import 'dropdown.dart';
 import 'returnmedicaltool.dart';
 import 'side_menu.dart';
 
@@ -75,8 +75,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => BorrowMedicalTool()),
+                        MaterialPageRoute(builder: (context) => Dropdown()),
                       );
                     },
                     child: Container(
@@ -97,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            "ยืมเครื่องมือแพทย์",
+                            "ข้อมูลการยืม",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,

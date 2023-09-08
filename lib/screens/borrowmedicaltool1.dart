@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -6,20 +5,16 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:medicaltoolv2/utility/api_domain.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:flutter/cupertino.dart';
 
-final storage = GetStorage();
-// import 'package:flutter_dropdown_alert/alert_controller.dart';
-// import 'package:flutter_dropdown_alert/dropdown_alert.dart';
-// import 'package:flutter_dropdown_alert/model/data_alert.dart';
-
-class ReturnMedicalTool extends StatefulWidget {
-  const ReturnMedicalTool({super.key});
+class BorrowMedicalTool1 extends StatefulWidget {
+  const BorrowMedicalTool1({super.key});
 
   @override
-  State<ReturnMedicalTool> createState() => _ReturnMedicalToolState();
+  State<BorrowMedicalTool1> createState() => _BorrowMedicalToolState();
 }
 
-class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
+class _BorrowMedicalToolState extends State<BorrowMedicalTool1> {
   final formkey = GlobalKey<FormState>();
 
   TextEditingController mdc_name = TextEditingController();
@@ -36,49 +31,22 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
   TextEditingController mdc_now = TextEditingController();
   TextEditingController mdc_date_return = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    getdata();
-  }
-
-  Future<void> getdata() async {
-    mdc_name.text = storage.read('mdcName') ?? '';
-    //mdc_name.text = 'TEst';
-    print('mdc_name$mdc_name');
-    mdc_dep.text = storage.read('mdcDep') ?? '';
-    mdc_id.text = storage.read('mdcDoc') ?? '';
-    mdc_run.text = storage.read('mdcRun') ?? '';
-    mdc_yeeho.text = storage.read('mdcYeeho') ?? '';
-    mdc_cd.text = storage.read('mdcCd') ?? '';
-    // mdc_reason.text = '';
-    // mdc_sendem_name.text = '';
-    // mdc_sendem_cd.text = '';
-    // mdc_receiveem_name.text = '';
-    // mdc_receiveem_cd.text = '';
-    // mdc_date_return.text = '';
-  }
-
+  DateTime? _selectedBorrowDate;
   DateTime? _selectedReturnDate;
-  DateTime _selectedDateTime = DateTime.now();
-  Future<void> _selectDate(BuildContext context) async {
+
+  Future<void> _selectBorrowDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: _selectedDateTime,
+      initialDate: _selectedBorrowDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
 
-    if (pickedDate != null && pickedDate != _selectedDateTime) {
+    if (pickedDate != null && pickedDate != _selectedBorrowDate) {
       setState(() {
-        _selectedDateTime = DateTime(
-          pickedDate.year,
-          pickedDate.month,
-          pickedDate.day,
-          _selectedDateTime.hour,
-          _selectedDateTime.minute,
-        );
-        mdc_now.text = _selectedDateTime.toLocal().toString().substring(0, 16);
+        _selectedBorrowDate = pickedDate;
+        mdc_now.text =
+            DateFormat('yyyy-MM-dd').format(pickedDate); // อัปเดตค่าใน mdc_now
       });
     }
   }
@@ -94,7 +62,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
     if (pickedDate != null && pickedDate != _selectedReturnDate) {
       setState(() {
         _selectedReturnDate = pickedDate;
-        mdc_date_return.text = DateFormat('dd-MM-yyyy')
+        mdc_date_return.text = DateFormat('yyyy-MM-dd')
             .format(pickedDate); // อัปเดตค่าใน mdc_return
       });
     }
@@ -104,7 +72,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('คืนเครื่องมือแพทย์'),
+        title: const Text('ยืมเครื่องมือแพทย์'),
         backgroundColor: Colors.blue,
       ),
       body: ListView(
@@ -274,12 +242,12 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                       height: 5,
                     ),
                     const Text(
-                      "เหตุผลในการคืน:",
+                      "เหตุผลในการยืม:",
                       style: TextStyle(fontSize: 20),
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        hintText: 'กรุณากรอกเหตุผลในการคืน',
+                        hintText: 'กรุณากรอกเหตุผลในการยืม',
                         contentPadding: const EdgeInsets.all(20.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
@@ -288,7 +256,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                       controller: mdc_reason,
                       validator: ((value) {
                         if (value!.isEmpty) {
-                          return 'กรุณากรอกเหตุผลในการคืน';
+                          return 'กรุณากรอกเหตุผลในการยืม';
                         }
                         return null;
                       }),
@@ -312,51 +280,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "ชื่อผู้รับเครื่อง",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'กรุณากรอกชื่อผู้รับ',
-                              contentPadding: const EdgeInsets.all(20.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                            controller: mdc_receiveem_name,
-                            validator: ((value) {
-                              if (value!.isEmpty) {
-                                return 'กรุณากรอกชื่อผู้รับ';
-                              }
-                              return null;
-                            }),
-                            keyboardType: TextInputType.text,
-                            autocorrect: false,
-                          ),
-                          const Text(
-                            "รหัสพนักงานผู้รับเครื่อง",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'กรุณากรอกรหัสผู้รับ',
-                              contentPadding: const EdgeInsets.all(20.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                            controller: mdc_receiveem_cd,
-                            validator: ((value) {
-                              if (value!.isEmpty) {
-                                return 'กรุณากรอกรหัสผู้รับ';
-                              }
-                              return null;
-                            }),
-                            keyboardType: TextInputType.text,
-                            autocorrect: false,
-                          ),
-                          const Text(
-                            "ชื่อผู้ส่งเครื่อง",
+                            "ชื่อผู้ส่ง",
                             style: TextStyle(fontSize: 20),
                           ),
                           TextFormField(
@@ -378,7 +302,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                             autocorrect: false,
                           ),
                           const Text(
-                            "รหัสพนักงานผู้ส่งเครื่อง",
+                            "รหัสผู้ส่ง",
                             style: TextStyle(fontSize: 20),
                           ),
                           TextFormField(
@@ -398,6 +322,90 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                             }),
                             keyboardType: TextInputType.text,
                             autocorrect: false,
+                          ),
+                          Text(
+                            "เจ้าหน้าที่แผนก",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          const Text(
+                            "ชื่อผู้รับ",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'กรุณากรอกชื่อผู้รับ',
+                              contentPadding: const EdgeInsets.all(20.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            controller: mdc_receiveem_name,
+                            validator: ((value) {
+                              if (value!.isEmpty) {
+                                return 'กรุณากรอกชื่อผู้รับ';
+                              }
+                              return null;
+                            }),
+                            keyboardType: TextInputType.text,
+                            autocorrect: false,
+                          ),
+                          const Text(
+                            "รหัสผู้รับ",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'กรุณากรอกรหัสผู้รับ',
+                              contentPadding: const EdgeInsets.all(20.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            controller: mdc_receiveem_cd,
+                            validator: ((value) {
+                              if (value!.isEmpty) {
+                                return 'กรุณากรอกรหัสผู้รับ';
+                              }
+                              return null;
+                            }),
+                            keyboardType: TextInputType.text,
+                            autocorrect: false,
+                          ),
+                          Text(
+                            'วันที่ยืม: ${mdc_now.text ?? "กรุณาเลือกวันที่ยืม"}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () => _selectBorrowDate(context),
+                                  child: Row(
+                                    children: [
+                                      Icon(CupertinoIcons.calendar,
+                                          color: Colors
+                                              .red), // ใช้ไอคอนจาก CupertinoIcons
+                                      const SizedBox(
+                                          width:
+                                              5), // ระยะห่างระหว่างไอคอนและข้อความ
+                                      const Text(
+                                        'เลือกวันที่ยืม ',
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                              ],
+                            ),
                           ),
                           Text(
                             'กำหนดวันที่คืน: ${mdc_date_return.text ?? "กรุณาเลือกวันที่คืน"}',
@@ -428,6 +436,9 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                                     ],
                                   ),
                                 ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
                               ],
                             ),
                           ),
@@ -444,7 +455,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                           SizedBox(
                               child: ElevatedButton(
                             child: const Text(
-                              "บันทึกการคืน",
+                              "บันทึกการยืม",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Color.fromARGB(255, 252, 0, 0),
@@ -482,15 +493,18 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
       'mdc_sendem_cd': mdc_sendem_cd.text,
       'mdc_receiveem_name': mdc_receiveem_name.text,
       'mdc_receiveem_cd': mdc_receiveem_cd.text,
+      'mdc_now': _selectedBorrowDate != null
+          ? DateFormat('yyyy-MM-dd 00:00:00').format(_selectedBorrowDate!)
+          : "",
       'mdc_date_return': _selectedReturnDate != null
           ? DateFormat('yyyy-MM-dd 00:00:00').format(_selectedReturnDate!)
           : "",
     };
 
     var respon = await http.get(
-      Uri.http(apiin, apiinsertreturn, queryParam),
+      Uri.http(apiin, apiinsert, queryParam),
     );
-    print('response=$apiin$apiinsertreturn$queryParam');
+    print('response=$apiin$apiinsert$queryParam');
     if (respon.statusCode == 200) {
       var jsonString = respon.body.toString().trim();
       print(jsonString);

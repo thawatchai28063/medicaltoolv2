@@ -3,12 +3,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:medicaltoolv2/screens/detail_pagev2.dart';
 import 'package:medicaltoolv2/utility/api_domain.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter/cupertino.dart';
-
-import 'home.dart';
 
 final storage = GetStorage();
 
@@ -50,10 +47,11 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
     //mdc_name.text = 'TEst';
     print('mdc_name$mdc_name');
     mdc_dep.text = storage.read('mdcDep') ?? '';
-    mdc_id.text = storage.read('mdcUbr') ?? '';
-    mdc_run.text = ''; //storage.read('mdcName') ?? '';
+    mdc_id.text = storage.read('mdcDoc') ?? '';
+    mdc_run.text = storage.read('mdcRun') ?? '';
     mdc_yeeho.text = storage.read('mdcYeeho') ?? '';
     mdc_cd.text = storage.read('mdcCd') ?? '';
+    // mdc_cd.text = storage.read('mdcCd') ?? '';
     // mdc_reason.text = storage.read('mdcCd') ?? '';
     // mdc_sendem_name.text = storage.read('mdcCd') ?? '';
     // mdc_sendem_cd.text = storage.read('mdcCd') ?? '';

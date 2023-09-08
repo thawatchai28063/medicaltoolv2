@@ -18,14 +18,18 @@ class product_controller extends GetxController {
       storage.write('mdcDep', listproduct[0].mdcDep.toString());
       storage.write('mdcName', listproduct[0].mdcName.toString());
       storage.write('mdcCd', listproduct[0].mdcCd.toString());
+      storage.write('mdcId', listproduct[0].mdcId.toString());
       storage.write('mdcEquipment', listproduct[0].mdcEquipment.toString());
       storage.write('mdcYeeho', listproduct[0].mdcYeeho.toString());
       storage.write('mdcUbr', listproduct[0].mdcUbr.toString());
       storage.write('mdcLocation', listproduct[0].mdcLocation.toString());
       storage.write('mdcCostlast', listproduct[0].mdcCostlast.toString());
-
+      storage.write('mdcRun', listproduct[0].mdcRun.toString());
+      storage.write('mdcDoc', listproduct[0].mdcDoc.toString());
       //print('mdcDep=' + storage.read('mdcDep'));
     }
     print(resturnList);
   }
+
+  fetchProductByDepartment(String level1) {}
 }

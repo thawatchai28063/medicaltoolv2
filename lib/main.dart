@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medicaltoolv2/screens/detail_page.dart';
-import 'package:medicaltoolv2/screens/product_detail.dart';
+import 'package:medicaltoolv2/screens/detail_pagev2.dart';
 import 'package:get_storage/get_storage.dart';
 import 'screens/borrowmedicaltool.dart';
-import 'screens/detail_pagev2.dart';
 import 'screens/home.dart';
 import 'screens/login.dart';
 import 'screens/returnmedicaltool.dart';
@@ -35,14 +33,14 @@ class MyApp extends StatelessWidget {
       name: '/ReturnMedicalTool',
       page: () => ReturnMedicalTool(),
     ),
-    GetPage(
-      name: '/detailpage',
-      page: () => DetailPage(),
-    ),
-    GetPage(
-      name: '/productdetail',
-      page: () => Product_detail(),
-    ),
+    // GetPage(
+    //   name: '/detailpage',
+    //   page: () => DetailPage(),
+    // ),
+    // GetPage(
+    //   name: '/productdetail',
+    //   page: () => Product_detail(),
+    // ),
     GetPage(
       name: '/detail',
       page: () => Detailv2(),
@@ -51,7 +49,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    String initialPage = '/detail';
+    String initialPage = '/';
     return GetMaterialApp(
       title: 'Medicaltool',
       debugShowCheckedModeBanner: false,

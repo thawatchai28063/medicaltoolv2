@@ -1,290 +1,350 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:medicaltoolv2/remote_service/remote_server.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
+import 'package:animated_floating_buttons/animated_floating_buttons.dart';
 import '../controller/detail_productcon.dart';
-import '../model/MdcModel.dart';
+import 'borrowmedicaltool.dart';
+import 'returnmedicaltool.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:floating_action_bubble/floating_action_bubble.dart';
 
-class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+final storage = GetStorage();
+
+class Detailv2 extends StatefulWidget {
+  const Detailv2({super.key});
 
   @override
-  State<DetailPage> createState() => _DetailPageState();
+  State<Detailv2> createState() => _Detailv2State();
 }
 
-class _DetailPageState extends State<DetailPage> {
-  List<MdcModel> mdcListsn = [];
+class _Detailv2State extends State<Detailv2> {
+  String val_search = ''; // Initialize val_search
+  // String? mdcDep = storage.read('mdcDep');
+  // String? mdcName = storage.read('mdcName');
+  // String? mdcCd = storage.read('mdcCd');
+  // String? mdcEquipment = storage.read('mdcEquipment');
+  // String? mdcYeeho = storage.read('mdcYeeho');
+  // String? mdcUbr = storage.read('mdcUbr');
+  // String? mdcLocation = storage.read('mdcLocation');
+  // String? mdcCostlast = storage.read('mdcCostlast');
 
+  final productlist = Get.put(product_controller());
+  TextEditingController text_find = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    String val_search = '';
-    String val_barcode = '';
-    TextEditingController text_find = TextEditingController();
-    final productlist = Get.put(product_controller());
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 224, 231, 215),
       appBar: AppBar(
-        title: Text('ข้อมูลอุปกรณ์'),
-        backgroundColor: Colors.blue,
+        automaticallyImplyLeading: true,
+        toolbarHeight: 60,
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/Logo3.png',
+              width: 60,
+              height: 60,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            const Text(
+              'ข้อมูลอุปกรณ์',
+              style: TextStyle(fontSize: 25),
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: 30,
-            ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    child: Row(
-                      children: [
-                        Icon(Icons.search), // Add your icon here
-                        SizedBox(
-                            width:
-                                1.6), // Add some space between the icon and text
-                        Text(
-                          "ค้นข้อมูล",
-                          style: TextStyle(fontSize: 20, color: Colors.black),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      productlist.fectfindproduct('${val_search}');
-                      // RemoteService.fectmdcid('18-21-5511-0004');
-                      //  getproductinfo('18-21-5511-0004');
-                      // QuickAlert.show(
-                      //   context: context,
-                      //   type: QuickAlertType.error,
-                      //   title: 'Data Scan ',
-                      //   text: val_search,
-                      //   confirmBtnText: 'OK',
-                      // );
-                      // getproductinfo(val_search);
-                    },
-                  ),
-                  // SizedBox(
-                  //   width: 15,
-                  // ),
-                  ElevatedButton(
-                    child: Row(
-                      children: [
-                        Icon(Icons.qr_code), // Add your icon here
-                        SizedBox(
-                            width:
-                                1.6), // Add some space between the icon and text
-                        Text(
-                          "Scanned QR Code",
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ],
-                    ),
-                    onPressed: () async {
-                      var res = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const SimpleBarcodeScannerPage(),
-                          ));
-                      setState(() {
-                        if (res is String) {
-                          productlist.fectfindproduct(res);
-                          // getproductinfo(res);
-                          QuickAlert.show(
-                            context: context,
-                            type: QuickAlertType.success,
-                            text: '${res}',
-                          );
-                        }
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
               height: 20,
-              width: 300,
             ),
-            Container(
-              height: 100,
-              width: 300,
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(width: 3, color: Colors.black12),
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
+            Row(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
+                    controller: text_find,
                     decoration: InputDecoration(
                       labelText: 'กรุณากรอกข้อมูล',
                       hintText: 'กรอกข้อมูล',
-                      contentPadding: EdgeInsets.all(50.0),
+                      // contentPadding: EdgeInsets.all(20.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
+                      prefixIcon:
+                          Icon(Icons.search), // Add an icon to the prefix
                     ),
                     onChanged: (value) {
                       setState(() {
                         val_search = value;
+                        productlist.listproduct.clear();
+                        productlist.fectfindproduct(val_search);
                       });
                     },
                   ),
-                  height: 20,
                 ),
-              ),
+                IconButton(
+                  icon: Icon(
+                    Icons.qr_code,
+                    size: 50,
+                  ),
+                  onPressed: () async {
+                    var res = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SimpleBarcodeScannerPage(),
+                      ),
+                    );
+                    setState(() {
+                      if (res is String) {
+                        val_search = res;
+                        productlist.listproduct.clear();
+                        productlist.fectfindproduct(res);
+
+                        QuickAlert.show(
+                          context: context,
+                          type: QuickAlertType.success,
+                          text: '$res',
+                        );
+                      }
+                    });
+                  },
+                ),
+              ],
             ),
+            SizedBox(height: 20),
             Text('Value: $val_search'),
-            Text(productlist.listproduct.length.toString()),
+            // Text(productlist.listproduct.length.toString()),
             Container(
               child: Obx(
                 () => productlist.listproduct.isEmpty
                     ? Center(
-                        child: SizedBox(
-                          width: 200,
-                          height: 200,
-                          child: Text('กรอกข้อมูล หรือ Scan Barcode '),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              height: 50,
+                              child: Text(
+                                'กรอกข้อมูล หรือ Scan Barcode',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Image.asset(
+                              'assets/images/Doctor1.jpg', // Replace with your image URL
+                              width: 250,
+                              height: 250,
+                            ),
+                          ],
                         ),
                       )
                     : SingleChildScrollView(
                         child: Container(
                           alignment: Alignment.center,
-                          padding: EdgeInsets.all(35),
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 209, 207, 202),
-                            border:
-                                Border.all(width: 1.6, color: Colors.black12),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          child: Column(
-                            children: [
-                              Text('SacanResult'),
-                              Text(
-                                'แผนก  :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                          padding: EdgeInsets.all(5),
+                          child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  Text('ScanResult',
+                                      style: TextStyle(fontSize: 24)),
+                                  SizedBox(height: 20),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'รูปภาพ:',
+                                    value:
+                                        '', // ไม่ต้องใส่ข้อมูลที่ value เนื่องจากจะแสดงภาพที่แทนที่ได้
+                                  ),
+                                  // Divider(),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: Image.network(
+                                      'https://itp1.itopfile.com/ImageServer/4126d2c0cf8328a2/0/0/terumoLM835z-z834018553741.webp', // เปลี่ยนเป็น URL ของรูปภาพที่ต้องการแสดง
+                                      // productlist.listproduct[0].imageUrl,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.8, // ปรับความกว้างของรูปภาพ
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'แผนก:',
+                                    value: productlist.listproduct[0].mdcDep
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'ชื่ออุปกรณ์:',
+                                    value: productlist.listproduct[0].mdcName
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'หมายเลขเครื่อง:',
+                                    value: productlist.listproduct[0].mdcCd
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'อุปกรณ์:',
+                                    value: productlist
+                                        .listproduct[0].mdcEquipment
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'ยี่ฮ้อ:',
+                                    value: productlist.listproduct[0].mdcYeeho
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'อาคาร:',
+                                    value: productlist.listproduct[0].mdcUbr
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'พื้นที่:',
+                                    value: productlist
+                                        .listproduct[0].mdcLocation
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'สถานภาพสินทรัพย์:',
+                                    value: productlist
+                                        .listproduct[0].mdcCostlast
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  InfoRow(
+                                    title: 'ชื่ออุปกรณ์:',
+                                    value: productlist.listproduct[0].mdcName
+                                        .toString(),
+                                    // isCentered: true,
+                                  ),
+                                  Divider(),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Divider(),
+                                ],
                               ),
-                              Text(
-                                productlist.listproduct[0].mdcDep.toString(),
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 15),
-                              ),
-                              Text(
-                                'ชื่ออุปกรณ์   :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                productlist.listproduct[0].mdcName.toString(),
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 15),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                'CD  :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                productlist.listproduct[0].mdcCd.toString(),
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 15),
-                              ),
-                              Text(
-                                'Equipment :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                productlist.listproduct[0].mdcEquipment
-                                    .toString(),
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 15),
-                              ),
-                              Text(
-                                'ยี่ฮ้อ   :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                productlist.listproduct[0].mdcYeeho.toString(),
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 15),
-                              ),
-                              Text(
-                                'อาคาร',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                productlist.listproduct[0].mdcUbr.toString(),
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 15),
-                              ),
-                              Text(
-                                'พื้นที่   :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                productlist.listproduct[0].mdcLocation
-                                    .toString(),
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 15),
-                              ),
-                              Text(
-                                'last    :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                productlist.listproduct[0].mdcCostlast
-                                    .toString(),
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 15),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
               ),
             ),
-            Text('Value: $val_search'),
           ],
         ),
       ),
+      floatingActionButton: AnimatedFloatingActionButton(
+        fabButtons: <Widget>[
+          // ปุ่มแรก
+          Builder(
+            builder: (context) => FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        BorrowMedicalTool(), // หน้าปลายทางที่คุณต้องการเด้งไป
+                  ),
+                );
+              },
+              tooltip: 'ยืม',
+              child: Icon(Icons.assignment),
+            ),
+          ),
+          // ปุ่มที่สอง
+          Builder(
+            builder: (context) => FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ReturnMedicalTool(), // หน้าปลายทางที่คุณต้องการเด้งไป
+                  ),
+                );
+              },
+              tooltip: 'คืน',
+              child: Icon(Icons.content_paste_go),
+            ),
+          ),
+          // สามารถเพิ่มปุ่มอื่น ๆ เพิ่มเติมได้ตามต้องการ
+        ],
+        colorStartAnimation: Colors.blue,
+        colorEndAnimation: Colors.red,
+        animatedIconData:
+            AnimatedIcons.menu_close, // เปลี่ยนเป็นไอคอนที่คุณต้องการ
+      ),
     );
   }
+}
 
-  // Future<void> getproductinfo(String sn) async {
-  //   mdcListsn.clear();
-  //   mdcListsn = (await RemoteService.fectmdcid(sn))!;
-  //   if (mdcListsn.isNotEmpty) {
-  //     setState(() {});
-  //   }
-  // }
+class InfoRow extends StatelessWidget {
+  final String title;
+  final String value;
+  final TextAlign textAlign;
+
+  InfoRow({
+    required this.title,
+    required this.value,
+    this.textAlign = TextAlign.left,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: Text(
+            title,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Text(
+            value,
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 15,
+            ),
+            textAlign: textAlign, // ตั้งค่าให้เป็น TextAlign.center ที่นี่
+          ),
+        ),
+      ],
+    );
+  }
 }
