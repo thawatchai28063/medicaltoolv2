@@ -26,7 +26,7 @@ class product_controller extends GetxController {
       storage.write('mdcCostlast', listproduct[0].mdcCostlast.toString());
       storage.write('mdcRun', listproduct[0].mdcRun.toString());
       storage.write('mdcDoc', listproduct[0].mdcDoc.toString());
-      //print('mdcDep=' + storage.read('mdcDep'));
+      print('mdcDep=' + storage.read('mdcDep'));
     }
     print(resturnList);
   }
