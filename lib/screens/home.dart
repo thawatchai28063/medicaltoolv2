@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medicaltoolv2/controller/detail_productcon.dart';
-import 'borrowmedicaltool1.dart';
 import 'detail_pagev2.dart';
-import 'dropdown.dart';
-import 'returnmedicaltool.dart';
+import 'detailborrow.dart';
+import 'detailreturn.dart';
 import 'side_menu.dart';
 
 class HomePage extends StatefulWidget {
@@ -75,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Dropdown()),
+                        MaterialPageRoute(builder: (context) => DetailBorrow()),
                       );
                     },
                     child: Container(
@@ -90,13 +89,13 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.rotate_right,
+                            Icons.list,
                             color: Colors.yellow,
                             size: 48,
                           ),
                           SizedBox(height: 5),
                           Text(
-                            "ข้อมูลการยืม",
+                            "ข้อมูลการยืมอุปกรณ์",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
@@ -113,8 +112,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => ReturnMedicalTool()),
+                        MaterialPageRoute(builder: (context) => DetailReturn()),
                       );
                     },
                     child: Container(
@@ -135,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            "คืนเครื่องมือแพทย์",
+                            "ข้อมูลการคืนอุปกรณ์",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,

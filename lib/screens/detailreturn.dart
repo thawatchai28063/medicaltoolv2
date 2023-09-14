@@ -6,11 +6,11 @@ import 'package:medicaltoolv2/remote_service/remote_server.dart';
 import '../controller/dep_controller.dart';
 import '../model/model_dep.dart';
 
-class Dropdown extends StatefulWidget {
-  Dropdown({Key? key});
+class DetailReturn extends StatefulWidget {
+  DetailReturn({Key? key});
 
   @override
-  State<Dropdown> createState() => _DropdownState();
+  State<DetailReturn> createState() => _DetailReturnState();
 }
 
 // final List<MultiLevelString> myItems = [
@@ -20,7 +20,7 @@ class Dropdown extends StatefulWidget {
 //   // เพิ่มแผนกอื่น ๆ ตามที่คุณต้องการ
 // ];
 
-class _DropdownState extends State<Dropdown> {
+class _DetailReturnState extends State<DetailReturn> {
   String? selectedDepartment;
   List<Widget> selectedCards = [];
   final deplist = Get.put(dep_controller());
@@ -65,7 +65,7 @@ class _DropdownState extends State<Dropdown> {
               width: 10,
             ),
             const Text(
-              'ข้อมูลการยืมอุปกรณ์',
+              'ข้อมูลการคืนอุปกรณ์',
               style: TextStyle(fontSize: 25),
             ),
           ],
@@ -178,21 +178,21 @@ class _DropdownState extends State<Dropdown> {
   }
 }
 
-class MultiLevelString {
-  final String level1;
+// class MultiLevelString {
+//   final String level1;
 
-  MultiLevelString({
-    this.level1 = "",
-  });
+//   MultiLevelString({
+//     this.level1 = "",
+//   });
 
-  @override
-  String toString() => level1;
-}
+//   @override
+//   String toString() => level1;
+// }
 
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
-      body: Dropdown(),
+      body: DetailReturn(),
     ),
   ));
 }
