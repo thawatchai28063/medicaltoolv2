@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:get/get.dart';
-import 'package:medicaltoolv2/remote_service/remote_server.dart';
-
 import '../controller/dep_controller.dart';
 import '../controller/get_borrow.dart';
 import '../model/model_dep.dart';
+import 'detail_pagev2.dart';
+import 'detailtool.dart';
 
 class DetailBorrow extends StatefulWidget {
   DetailBorrow({Key? key});
@@ -118,55 +118,55 @@ class _DetailBorrowState extends State<DetailBorrow> {
     );
   }
 
-  List<Widget> _buildSelectedCards(String selectedData) {
-    // สร้าง Cards จากข้อมูลที่เลือกแผนก
-    return List.generate(3, (index) {
-      return Card(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset(
-                'assets/images/tool2.JPG',
-                width: 80,
-                height: 80,
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'รายละเอียด:',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'ข้อมูลการ์ดที่ $index',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'สำหรับแผนก:$selectedData',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    });
-  }
+  // List<Widget> _buildSelectedCards(String selectedData) {
+  //   // สร้าง Cards จากข้อมูลที่เลือกแผนก
+  //   return List.generate(3, (index) {
+  //     return Card(
+  //       child: Padding(
+  //         padding: const EdgeInsets.all(10.0),
+  //         child: Row(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             Image.asset(
+  //               'assets/images/tool2.JPG',
+  //               width: 80,
+  //               height: 80,
+  //             ),
+  //             SizedBox(width: 10),
+  //             Expanded(
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Text(
+  //                     'รายละเอียด:',
+  //                     style: TextStyle(
+  //                       fontSize: 16,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                   Text(
+  //                     'ข้อมูลการ์ดที่ $index',
+  //                     style: TextStyle(
+  //                       fontSize: 16,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                   Text(
+  //                     'สำหรับแผนก:$selectedData',
+  //                     style: TextStyle(
+  //                       fontSize: 16,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     );
+  //   });
+  // }
 
   Widget showdetail(int index) {
     var getshow = getborrowlist.listborrow[index];
@@ -211,7 +211,10 @@ class _DetailBorrowState extends State<DetailBorrow> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => DetailPage()));
+              },
               icon: Icon(
                 Icons.list,
                 size: 50,

@@ -1,11 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:medicaltoolv2/remote_service/remote_server.dart';
 import 'package:medicaltoolv2/utility/api_domain.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../controller/employee_controller.dart';
+import '../model/modeluser.dart';
 
 final storage = GetStorage();
 
@@ -17,8 +23,11 @@ class BorrowMedicalTool extends StatefulWidget {
 }
 
 class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
-  final formkey = GlobalKey<FormState>();
+  String val_search = '';
+  final productlist = Get.put(employee_controller());
+  TextEditingController text_find = TextEditingController();
 
+  final formkey = GlobalKey<FormState>();
   TextEditingController mdc_name = TextEditingController();
   TextEditingController mdc_dep = TextEditingController();
   TextEditingController mdc_id = TextEditingController();
@@ -341,6 +350,10 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                               ),
                             ),
                             controller: mdc_sendem_cd,
+                            onChanged: (value) {
+                              // val_search = value;
+                              checkuser(value);
+                            },
                             validator: ((value) {
                               if (value!.isEmpty) {
                                 return 'กรุณากรอกรหัสผู้ส่ง';
@@ -505,6 +518,52 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
         ],
       ),
     );
+  }
+
+  void checkuser(String req) async {
+    Map<String, String> queryParam = {
+      'SN': req,
+    };
+
+    var respon = await http.get(
+      Uri.http(apiin, apiuser, queryParam),
+    );
+    print('body ${respon.body}');
+    var jsonString = jsonDecode(respon.body);
+    print('body ${respon.body}');
+    if (respon.body.toString() != 'NO') {
+      var jsonString = jsonDecode(respon.body);
+      if (jsonString != 'null') {
+        print(jsonString);
+        mdc_sendem_name.text = jsonString[0]['name'];
+      } else {
+        mdc_sendem_name.text = '';
+      }
+    } else {
+      print(respon.body);
+      //   mdc_sendem_name.text = '';
+    }
+
+    // String? name = list![0].name.toString();
+    // print(name);
+    // if (list != null) {
+    //   mdc_sendem_name.text = name;
+    // } else {
+    //   mdc_sendem_name.text = '';
+    // }
+    // setState(() {});
+
+    // print('length=+$listemployee');
+    // if (productlist.listemployee.isNotEmpty) {
+    //   if (productlist.listemployee[0].code != '') {
+    //     mdc_sendem_name.text = 'OK';
+    //   } else {
+    //     mdc_sendem_name.text = 'No';
+    //   }
+    // } else {
+    //   // กรณีที่รายการว่างเปล่า
+    //   mdc_sendem_name.text = 'No';
+    // }
   }
 
   Future<String?> insert() async {

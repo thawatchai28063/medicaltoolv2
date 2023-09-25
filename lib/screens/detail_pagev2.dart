@@ -62,6 +62,7 @@ class _Detailv2State extends State<Detailv2> {
               height: 20,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
@@ -124,28 +125,38 @@ class _Detailv2State extends State<Detailv2> {
                 () => productlist.listproduct.isEmpty
                     ? Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: Text(
-                                'กรอกข้อมูล หรือ Scan Barcode',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 200,
+                            height: 50,
+                            child: Text(
+                              'กรอกข้อมูล หรือ Scan Barcode',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 5),
-                            Image.asset(
+                          ),
+                          SizedBox(height: 5),
+                          Container(
+                            width: 250,
+                            height: 250,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2, color: Colors.black), // ปรับขอบภาพ
+                            ),
+                            child: Image.asset(
                               'assets/images/Doctor1.jpg', // Replace with your image URL
                               width: 250,
                               height: 250,
+                              fit: BoxFit
+                                  .cover, // ปรับขนาดรูปภาพให้พอดีกับ Container
                             ),
-                          ],
-                        ),
-                      )
+                          ),
+                        ],
+                      ))
                     : SingleChildScrollView(
                         child: Container(
                           alignment: Alignment.center,

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:medicaltoolv2/screens/detail_pagev2.dart';
 import 'package:get_storage/get_storage.dart';
 import 'screens/borrowmedicaltool.dart';
-import 'screens/dropdown.dart';
 import 'screens/home.dart';
 import 'screens/login.dart';
 import 'screens/returnmedicaltool.dart';
@@ -34,10 +33,10 @@ class MyApp extends StatelessWidget {
       name: '/ReturnMedicalTool',
       page: () => ReturnMedicalTool(),
     ),
-    GetPage(
-      name: '/detailpage',
-      page: () => Dropdown(),
-    ),
+    // GetPage(
+    //   name: '/detailpage',
+    //   page: () => Dropdown(),
+    // ),
     // GetPage(
     //   name: '/productdetail',
     //   page: () => Product_detail(),
