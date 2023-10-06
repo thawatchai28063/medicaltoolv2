@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:medicaltoolv2/model/model_dep.dart';
-import 'package:medicaltoolv2/model/UserModel';
+import 'package:medicaltoolv2/model/UserModel.dart';
 import '../model/MdcModel.dart';
 import '../model/model_get.dart';
 import '../utility/api_domain.dart';
