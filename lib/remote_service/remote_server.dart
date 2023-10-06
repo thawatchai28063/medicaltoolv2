@@ -5,7 +5,6 @@ import 'package:medicaltoolv2/model/model_dep.dart';
 import 'package:medicaltoolv2/model/UserModel';
 import '../model/MdcModel.dart';
 import '../model/model_get.dart';
-import '../model/modeluser.dart';
 import '../utility/api_domain.dart';
 import 'dart:convert';
 
