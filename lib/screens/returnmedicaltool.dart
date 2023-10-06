@@ -29,10 +29,10 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
   TextEditingController mdc_yeeho = TextEditingController();
   TextEditingController mdc_cd = TextEditingController();
   TextEditingController mdc_reason = TextEditingController();
-  TextEditingController mdc_sendem_name = TextEditingController();
-  TextEditingController mdc_sendem_cd = TextEditingController();
   TextEditingController mdc_receiveem_name = TextEditingController();
   TextEditingController mdc_receiveem_cd = TextEditingController();
+  TextEditingController mdc_sendem_name = TextEditingController();
+  TextEditingController mdc_sendem_cd = TextEditingController();
   TextEditingController mdc_now = TextEditingController();
   TextEditingController mdc_date_return = TextEditingController();
 
@@ -51,6 +51,8 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
     mdc_run.text = storage.read('mdcRun') ?? '';
     mdc_yeeho.text = storage.read('mdcYeeho') ?? '';
     mdc_cd.text = storage.read('mdcCd') ?? '';
+    mdc_sendem_name.text = storage.read('user') ?? '';
+    mdc_sendem_cd.text = storage.read('em_cd') ?? '';
     // mdc_reason.text = '';
     // mdc_sendem_name.text = '';
     // mdc_sendem_cd.text = '';
@@ -300,7 +302,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                       child: Row(
                         children: [
                           Text(
-                            "เจ้าหน้าที่เครื่องมือแพทย์:",
+                            "เจ้าหน้าที่แผนกที่คืนเครื่อง:",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
@@ -312,51 +314,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "ชื่อผู้รับเครื่อง",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'กรุณากรอกชื่อผู้รับ',
-                              contentPadding: const EdgeInsets.all(20.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                            controller: mdc_receiveem_name,
-                            validator: ((value) {
-                              if (value!.isEmpty) {
-                                return 'กรุณากรอกชื่อผู้รับ';
-                              }
-                              return null;
-                            }),
-                            keyboardType: TextInputType.text,
-                            autocorrect: false,
-                          ),
-                          const Text(
-                            "รหัสพนักงานผู้รับเครื่อง",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'กรุณากรอกรหัสผู้รับ',
-                              contentPadding: const EdgeInsets.all(20.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                            controller: mdc_receiveem_cd,
-                            validator: ((value) {
-                              if (value!.isEmpty) {
-                                return 'กรุณากรอกรหัสผู้รับ';
-                              }
-                              return null;
-                            }),
-                            keyboardType: TextInputType.text,
-                            autocorrect: false,
-                          ),
-                          const Text(
-                            "ชื่อผู้ส่งเครื่อง",
+                            "ชื่อผู้ส่งเครื่องคืน",
                             style: TextStyle(fontSize: 20),
                           ),
                           TextFormField(
@@ -367,7 +325,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            controller: mdc_sendem_name,
+                            controller: mdc_receiveem_name,
                             validator: ((value) {
                               if (value!.isEmpty) {
                                 return 'กรุณากรอกชื่อผู้ส่ง';
@@ -389,10 +347,67 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            controller: mdc_sendem_cd,
+                            controller: mdc_receiveem_cd,
                             validator: ((value) {
                               if (value!.isEmpty) {
                                 return 'กรุณากรอกรหัสผู้ส่ง';
+                              }
+                              return null;
+                            }),
+                            keyboardType: TextInputType.text,
+                            autocorrect: false,
+                          ),
+                          const SizedBox(
+                            height: 30,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "เจ้าหน้าที่เครื่องมือแพทย์:",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Text(
+                            "ชื่อผู้รับเครื่อง",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'กรุณากรอกชื่อรับเครื่อง',
+                              contentPadding: const EdgeInsets.all(20.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            controller: mdc_sendem_name,
+                            validator: ((value) {
+                              if (value!.isEmpty) {
+                                return 'กรุณากรอกชื่อผู้รับเครื่อง';
+                              }
+                              return null;
+                            }),
+                            keyboardType: TextInputType.text,
+                            autocorrect: false,
+                          ),
+                          const Text(
+                            "รหัสพนักงานผู้รับเครื่อง",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'กรุณากรอกรหัสผู้รับเครื่อง',
+                              contentPadding: const EdgeInsets.all(20.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            controller: mdc_sendem_cd,
+                            validator: ((value) {
+                              if (value!.isEmpty) {
+                                return 'กรุณากรอกรหัสผู้รับเครื่อง';
                               }
                               return null;
                             }),
@@ -488,9 +503,9 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
     };
 
     var respon = await http.get(
-      Uri.http(apiin, apiinsertreturn, queryParam),
+      Uri.http(apidomain, apiinsertreturn, queryParam),
     );
-    print('response=$apiin$apiinsertreturn$queryParam');
+    print('response=$apidomain$apiinsertreturn$queryParam');
     if (respon.statusCode == 200) {
       var jsonString = respon.body.toString().trim();
       print(jsonString);
@@ -501,7 +516,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
             text: 'บันทึกสำเร็จ',
             confirmBtnText: 'ถัดไป',
             onConfirmBtnTap: () async {
-              Get.toNamed('/detail');
+              Get.toNamed('/');
             });
       }
     }

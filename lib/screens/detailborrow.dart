@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:get/get.dart';
 import '../controller/dep_controller.dart';
+import '../controller/detail_productcon.dart';
 import '../controller/get_borrow.dart';
 import '../model/model_dep.dart';
 import 'detail_pagev2.dart';
@@ -22,6 +23,8 @@ class DetailBorrow extends StatefulWidget {
 // ];
 
 class _DetailBorrowState extends State<DetailBorrow> {
+  String val_search = '';
+  final productlist = Get.put(product_controller());
   String? selectedDepartment;
   List<Widget> selectedCards = [];
   final deplist = Get.put(dep_controller());
@@ -33,6 +36,7 @@ class _DetailBorrowState extends State<DetailBorrow> {
     // TODO: implement initState
     getdeplist('ALL');
     super.initState();
+    getborrowlist.fectgetborrow('ALL');
     setState(() {});
   }
 
@@ -67,7 +71,7 @@ class _DetailBorrowState extends State<DetailBorrow> {
               width: 10,
             ),
             const Text(
-              'ข้อมูลการยืมอุปกรณ์',
+              'ข้อมูลการยืม',
               style: TextStyle(fontSize: 25),
             ),
           ],
@@ -194,26 +198,65 @@ class _DetailBorrowState extends State<DetailBorrow> {
                     ),
                   ),
                   Text(
-                    'SN= ${getshow.mdcCd}',
+                    'หมายเลขเครื่อง :',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'อยู่ที่ : ${getshow.mdcDep} ',
+                    '${getshow.mdcCd}',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
+                  Text(
+                    'ชื่อเครื่องมือ  :',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  Text(
+                    '${getshow.mdcName}',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
+                  Text(
+                    // 'อยู่ที่ : ${getshow.mdcDep} ',
+                    'อยู่ที่  :',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    // 'อยู่ที่ : ${getshow.mdcDep} ',
+                    '${getshow.mdcDep}',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
                 ],
               ),
             ),
             IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => DetailPage()));
+              onPressed: () async {
+                print(getshow.mdcCd);
+                Get.toNamed('/pagedetailtool?SN=${getshow.mdcCd}');
+                // var res = await Navigator.of(context).push(
+                //     MaterialPageRoute(builder: (context) => DetailPage()));
+                // setState(() {
+                //   if (res is String) {
+                //     val_search = res;
+                //     productlist.listproduct.clear();
+                //     productlist.fectfindproduct(res);
+                //   }
+                // });
               },
               icon: Icon(
                 Icons.list,

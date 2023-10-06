@@ -29,6 +29,8 @@ class MdcModel {
   String? mdcDpctYy;
   String? mdcDpctLast;
   String? mdcCostlast;
+  String? mdcSts;
+  String? mdcStsName;
 
   MdcModel({
     this.mdcCd,
@@ -49,6 +51,8 @@ class MdcModel {
     this.mdcDpctYy,
     this.mdcDpctLast,
     this.mdcCostlast,
+    this.mdcSts,
+    this.mdcStsName,
   });
 
   factory MdcModel.fromJson(Map<String, dynamic> json) => MdcModel(
@@ -70,6 +74,8 @@ class MdcModel {
         mdcDpctYy: json["mdc_dpct_yy"],
         mdcDpctLast: json["mdc_dpct_last"],
         mdcCostlast: json["mdc_costlast"],
+        mdcSts: json["mdc_sts"],
+        mdcStsName: json["mdc_sts_name"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -91,5 +97,7 @@ class MdcModel {
         "mdc_dpct_yy": mdcDpctYy,
         "mdc_dpct_last": mdcDpctLast,
         "mdc_costlast": mdcCostlast,
+        "mdc_sts": mdcSts,
+        "mdc_sts_name": mdcStsName,
       };
 }

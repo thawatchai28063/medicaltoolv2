@@ -60,6 +60,10 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
     mdc_run.text = storage.read('mdcRun') ?? '';
     mdc_yeeho.text = storage.read('mdcYeeho') ?? '';
     mdc_cd.text = storage.read('mdcCd') ?? '';
+
+    mdc_sendem_name.text = storage.read('user') ?? '';
+    mdc_sendem_cd.text = storage.read('em_cd') ?? '';
+
     // mdc_cd.text = storage.read('mdcCd') ?? '';
     // mdc_reason.text = storage.read('mdcCd') ?? '';
     // mdc_sendem_name.text = storage.read('mdcCd') ?? '';
@@ -526,7 +530,7 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
     };
 
     var respon = await http.get(
-      Uri.http(apiin, apiuser, queryParam),
+      Uri.http(apidomain, apiuser, queryParam),
     );
     print('body ${respon.body}');
     var jsonString = jsonDecode(respon.body);
@@ -588,9 +592,9 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
     };
 
     var respon = await http.get(
-      Uri.http(apiin, apiinsert, queryParam),
+      Uri.http(apidomain, apiinsert, queryParam),
     );
-    print('response=$apiin$apiinsert$queryParam');
+    print('response=$apidomain$apiinsert$queryParam');
     if (respon.statusCode == 200) {
       var jsonString = respon.body.toString().trim();
       print(jsonString);
@@ -601,7 +605,7 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
             text: 'บันทึกสำเร็จ',
             confirmBtnText: 'ถัดไป',
             onConfirmBtnTap: () async {
-              Get.toNamed('/detail');
+              Get.toNamed('/');
             });
       }
     }

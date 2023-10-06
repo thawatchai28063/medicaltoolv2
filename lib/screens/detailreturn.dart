@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:get/get.dart';
 import '../controller/dep_controller.dart';
+import '../controller/detail_productcon.dart';
 import '../controller/get_return.dart';
 import '../model/model_dep.dart';
 import 'detail_returntool.dart';
@@ -22,6 +23,8 @@ class DetailReturn extends StatefulWidget {
 // ];
 
 class _DetailReturnState extends State<DetailReturn> {
+  String val_search = '';
+  final productlist = Get.put(product_controller());
   String? selectedDepartment;
   List<Widget> selectedCards = [];
   final deplist = Get.put(dep_controller());
@@ -33,6 +36,7 @@ class _DetailReturnState extends State<DetailReturn> {
     // TODO: implement initState
     getdeplist('ALL');
     super.initState();
+    getreturnlist.fectgetreturn('ALL');
     setState(() {});
   }
 
@@ -67,8 +71,8 @@ class _DetailReturnState extends State<DetailReturn> {
               width: 10,
             ),
             const Text(
-              'ข้อมูลการคืนอุปกรณ์',
-              style: TextStyle(fontSize: 25),
+              'ข้อมูลการคืน',
+              style: TextStyle(fontSize: 20),
             ),
           ],
         ),
@@ -118,56 +122,6 @@ class _DetailReturnState extends State<DetailReturn> {
     );
   }
 
-  // List<Widget> _buildSelectedCards(String selectedData) {
-  //   // สร้าง Cards จากข้อมูลที่เลือกแผนก
-  //   return List.generate(3, (index) {
-  //     return Card(
-  //       child: Padding(
-  //         padding: const EdgeInsets.all(10.0),
-  //         child: Row(
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             Image.asset(
-  //               'assets/images/tool2.JPG',
-  //               width: 80,
-  //               height: 80,
-  //             ),
-  //             SizedBox(width: 10),
-  //             Expanded(
-  //               child: Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text(
-  //                     'รายละเอียด:',
-  //                     style: TextStyle(
-  //                       fontSize: 16,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                   Text(
-  //                     'ข้อมูลการ์ดที่ $index',
-  //                     style: TextStyle(
-  //                       fontSize: 16,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                   Text(
-  //                     'สำหรับแผนก:$selectedData',
-  //                     style: TextStyle(
-  //                       fontSize: 16,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     );
-  //   });
-  // }
-
   Widget showdetail(int index) {
     var getshow = getreturnlist.listreturn[index];
     return Card(
@@ -194,26 +148,56 @@ class _DetailReturnState extends State<DetailReturn> {
                     ),
                   ),
                   Text(
-                    'SN= ${getshow.mdcCd}',
+                    'หมายเลขเครื่อง :',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'อยู่ที่ : ${getshow.mdcDep} ',
+                    '${getshow.mdcCd}',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
+                  Text(
+                    'ชื่อเครื่องมือ  :',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  Text(
+                    '${getshow.mdcName}',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
+                  Text(
+                    // 'อยู่ที่ : ${getshow.mdcDep} ',
+                    'อยู่ที่  :',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'แผนกเครื่องมือแพทย์',
+                    // '${getshow.mdcDep}',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
                 ],
               ),
             ),
             IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => DetailRPage()));
+              onPressed: () async {
+                print(getshow.mdcCd);
+                Get.toNamed('/pagedetailRtool?SN=${getshow.mdcCd}');
               },
               icon: Icon(
                 Icons.list,

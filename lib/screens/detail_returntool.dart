@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medicaltoolv2/remote_service/remote_server.dart';
+import '../controller/detail_productcon.dart';
 import '../controller/get_borrow.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../controller/get_return.dart';
+import '../model/MdcModel.dart';
 
 final storage = GetStorage();
 
@@ -11,62 +13,31 @@ class DetailRPage extends StatefulWidget {
   const DetailRPage({super.key});
 
   @override
-  State<DetailRPage> createState() => _DetailRPageState();
+  State<DetailRPage> createState() => _DetailPageState();
 }
 
-class _DetailRPageState extends State<DetailRPage> {
-  String val_search = '';
+class _DetailPageState extends State<DetailRPage> {
+  String? SN = Get.parameters['SN'] ?? '';
 
-  final listreturn = Get.put(getreturn_controller());
+  // final listborrow = Get.put(getborrow_controller());
   TextEditingController text_find = TextEditingController();
   @override
   void initState() {
     super.initState();
-    getdata();
+
+    getdata(SN!);
   }
 
-  final formkey = GlobalKey<FormState>();
-  TextEditingController mdc_name = TextEditingController();
-  TextEditingController mdc_dep = TextEditingController();
-  TextEditingController mdc_id = TextEditingController();
-  TextEditingController mdc_run = TextEditingController();
-  TextEditingController mdc_yeeho = TextEditingController();
-  TextEditingController mdc_cd = TextEditingController();
-  TextEditingController mdc_reason = TextEditingController();
-  TextEditingController mdc_sendem_name = TextEditingController();
-  TextEditingController mdc_sendem_cd = TextEditingController();
-  TextEditingController mdc_receiveem_name = TextEditingController();
-  TextEditingController mdc_receiveem_cd = TextEditingController();
-  TextEditingController mdc_now = TextEditingController();
-  TextEditingController mdc_date_return = TextEditingController();
+  //
+  List<MdcModel>? detailList = [];
+  String? mdcCd = '';
+  Future<void> getdata(String SN) async {
+    detailList = await RemoteService.fectmdcid(SN);
 
-  TextEditingController mdcLocation = TextEditingController();
-
-  TextEditingController mdcCostlast = TextEditingController();
-
-  TextEditingController mdcStsName = TextEditingController();
-
-  TextEditingController mdcPrice = TextEditingController();
-
-  TextEditingController mdcUbr = TextEditingController();
-
-  Future<void> getdata() async {
-    mdc_name.text = storage.read('mdcName') ?? '';
-    //mdc_name.text = 'TEst';
-    print('mdc_name$mdc_name');
-    mdc_dep.text = storage.read('mdcDep') ?? '';
-    mdc_id.text = storage.read('mdcDoc') ?? '';
-    mdc_run.text = storage.read('mdcRun') ?? '';
-    mdc_yeeho.text = storage.read('mdcYeeho') ?? '';
-    mdc_cd.text = storage.read('mdcCd') ?? '';
-    mdc_sendem_name.text = storage.read('mdcCd') ?? '';
-    mdc_sendem_cd.text = storage.read('mdcCd') ?? '';
-    mdcLocation.text = storage.read('mdcLocation') ?? '';
-    mdcCostlast.text = storage.read('mdcCostlast') ?? '';
-    mdcStsName.text = storage.read('mdcStsName') ?? '';
-    mdcPrice.text = storage.read('mdcPrice') ?? '';
-
-    mdcUbr.text = storage.read('mdcUbr') ?? '';
+    print('OK=${SN}');
+    print('api=${detailList![0].mdcCd ?? ''}');
+    mdcCd = detailList![0].mdcCd ?? '';
+    setState(() {});
   }
 
   Widget build(BuildContext context) {
@@ -127,67 +98,81 @@ class _DetailRPageState extends State<DetailRPage> {
                   Divider(),
                   InfoRow(
                     title: 'ครุภัณฑ์:',
-                    value: storage.read('mdcCd') ?? '',
+                    value:
+                        detailList!.isEmpty ? '' : detailList![0].mdcCd ?? '',
                     // isCentered: true,
                   ),
                   Divider(),
                   InfoRow(
                     title: 'ชื่ออุปกรณ์:',
-                    value: storage.read('mdcName') ?? '',
+                    value:
+                        detailList!.isEmpty ? '' : detailList![0].mdcName ?? '',
                     // isCentered: true,
                   ),
+                  // Divider(),
+                  // InfoRow(
+                  //   title: 'แผนก:',
+                  //   value:
+                  //       detailList!.isEmpty ? '' : detailList![0].mdcDep ?? '',
+                  //   // isCentered: true,
+                  // ),
                   Divider(),
                   InfoRow(
                     title: 'หมายเลขเครื่อง:',
-                    value: storage.read('mdcDep') ?? '',
-                    // isCentered: true,
-                  ),
-                  Divider(),
-                  InfoRow(
-                    title: 'หมายเลขเครื่อง:',
-                    value: storage.read('mdcDoc') ?? '',
+                    value:
+                        detailList!.isEmpty ? '' : detailList![0].mdcDoc ?? '',
                     // isCentered: true,
                   ),
                   Divider(),
                   InfoRow(
                     title: 'รุ่น:',
-                    value: storage.read('mdcRun') ?? '',
+                    value:
+                        detailList!.isEmpty ? '' : detailList![0].mdcRun ?? '',
                     // isCentered: true,
                   ),
                   Divider(),
                   InfoRow(
                     title: 'ยี่ฮ้อ:',
-                    value: storage.read('mdcYeeho') ?? '',
+                    value: detailList!.isEmpty
+                        ? ''
+                        : detailList![0].mdcYeeho ?? '',
                     // isCentered: true,
                   ),
-                  Divider(),
-                  InfoRow(
-                    title: 'แผนก:',
-                    value: storage.read('mdcDep') ?? '',
-                    // isCentered: true,
-                  ),
+                  // Divider(),
+                  // InfoRow(
+                  //   title: 'แผนก:',
+                  //   value: storage.read('mdcDep') ?? '',
+                  //   // isCentered: true,
+                  // ),
                   Divider(),
                   InfoRow(
                     title: 'อาคาร:',
-                    value: storage.read('mdcUbr') ?? '',
+                    value:
+                        detailList!.isEmpty ? '' : detailList![0].mdcUbr ?? '',
                     // isCentered: true,
                   ),
-                  Divider(),
-                  InfoRow(
-                    title: 'พื้นที่:',
-                    value: storage.read('mdcLocation') ?? '',
-                    // isCentered: true,
-                  ),
+                  // Divider(),
+                  // InfoRow(
+                  //   title: 'พื้นที่:',
+                  //   value: detailList!.isEmpty
+                  //       ? ''
+                  //       : detailList![0].mdcLocation ?? '',
+                  //   // isCentered: true,
+                  // ),
                   Divider(),
                   InfoRow(
                     title: 'ราคาที่ซื้อ:',
-                    value: storage.read('mdcPrice') ?? '',
+                    value: detailList!.isEmpty
+                        ? ''
+                        : detailList![0].mdcPrice ?? '',
                     // isCentered: true,
                   ),
                   Divider(),
                   InfoRow(
                     title: 'สถานภาพสินทรัพย์:',
-                    value: storage.read('mdcStsName') ?? '',
+                    value: detailList!.isEmpty
+                        ? ''
+                        : detailList![0].mdcStsName ?? '',
                     // isCentered: true,
                   ),
                   Divider(),

@@ -277,8 +277,7 @@ class _Detailv2State extends State<Detailv2> {
                                   Divider(),
                                   InfoRow(
                                     title: 'สถานภาพสินทรัพย์:',
-                                    value: productlist
-                                        .listproduct[0].mdcCostlast
+                                    value: productlist.listproduct[0].mdcStsName
                                         .toString(),
                                     // isCentered: true,
                                   ),
