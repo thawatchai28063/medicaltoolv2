@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medicaltoolv2/remote_service/remote_server.dart';
-import '../controller/detail_productcon.dart';
-import '../controller/get_borrow.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../model/MdcModel.dart';

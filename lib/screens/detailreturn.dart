@@ -5,8 +5,6 @@ import '../controller/dep_controller.dart';
 import '../controller/detail_productcon.dart';
 import '../controller/get_return.dart';
 import '../model/model_dep.dart';
-import 'detail_returntool.dart';
-import 'detailtool.dart';
 
 class DetailReturn extends StatefulWidget {
   DetailReturn({Key? key});

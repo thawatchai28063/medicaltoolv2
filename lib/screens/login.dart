@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medicaltoolv2/model/UserModel';
 import 'package:http/http.dart' as http;
 import 'package:quickalert/quickalert.dart';
 import 'package:get_storage/get_storage.dart';

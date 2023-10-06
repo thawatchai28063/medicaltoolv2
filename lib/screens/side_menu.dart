@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medicaltoolv2/screens/setting.dart';
 import 'package:get_storage/get_storage.dart';
 import 'borrowmedicaltool.dart';
 import 'detail_pagev2.dart';

@@ -1,17 +1,13 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:medicaltoolv2/remote_service/remote_server.dart';
 import 'package:medicaltoolv2/utility/api_domain.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../controller/employee_controller.dart';
-import '../model/modeluser.dart';
 
 final storage = GetStorage();
 
