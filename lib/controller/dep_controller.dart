@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 
-import '../model/model_dep.dart';
+import '../model/model_depv2.dart';
 import '../remote_service/remote_server.dart';
 
 class dep_controller extends GetxController {
   var isLoading = false.obs;
-  var listdep = <ModelDep>[].obs;
+  var listdep = <Modeldepv2>[].obs;
   @override
   void onInit() {
     // TODO: implement onInit

@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            "ข้อมูลการคืนอุปกรณ์",
+                            "อุปกรณ์ที่คืนแล้ว",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,

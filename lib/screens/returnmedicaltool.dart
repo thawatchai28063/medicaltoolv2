@@ -46,7 +46,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
     mdc_name.text = storage.read('mdcName') ?? '';
     //mdc_name.text = 'TEst';
     print('mdc_name$mdc_name');
-    mdc_dep.text = storage.read('mdcDep') ?? '';
+    mdc_dep.text = ('แผนกเครื่องมือแพทย์') ?? '';
     mdc_id.text = storage.read('mdcDoc') ?? '';
     mdc_run.text = storage.read('mdcRun') ?? '';
     mdc_yeeho.text = storage.read('mdcYeeho') ?? '';
@@ -275,9 +275,17 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                     const SizedBox(
                       height: 5,
                     ),
-                    const Text(
-                      "เหตุผลในการคืน:",
-                      style: TextStyle(fontSize: 20),
+                    Row(
+                      children: [
+                        const Text(
+                          "*",
+                          style: TextStyle(fontSize: 20, color: Colors.red),
+                        ),
+                        const Text(
+                          "เหตุผลในการคืน:",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
                     ),
                     TextFormField(
                       decoration: InputDecoration(
@@ -313,9 +321,18 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "ชื่อผู้ส่งเครื่องคืน",
-                            style: TextStyle(fontSize: 20),
+                          Row(
+                            children: [
+                              const Text(
+                                "*",
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.red),
+                              ),
+                              const Text(
+                                "ชื่อผู้ส่งเครื่องคืน",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
                           ),
                           TextFormField(
                             decoration: InputDecoration(
@@ -335,9 +352,18 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                             keyboardType: TextInputType.text,
                             autocorrect: false,
                           ),
-                          const Text(
-                            "รหัสพนักงานผู้ส่งเครื่อง",
-                            style: TextStyle(fontSize: 20),
+                          Row(
+                            children: [
+                              const Text(
+                                "*",
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.red),
+                              ),
+                              const Text(
+                                "รหัสพนักงานผู้ส่งเครื่องคืน",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
                           ),
                           TextFormField(
                             decoration: InputDecoration(
@@ -383,6 +409,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                               ),
                             ),
                             controller: mdc_sendem_name,
+                            enabled: false,
                             validator: ((value) {
                               if (value!.isEmpty) {
                                 return 'กรุณากรอกชื่อผู้รับเครื่อง';
@@ -405,6 +432,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                               ),
                             ),
                             controller: mdc_sendem_cd,
+                            enabled: false,
                             validator: ((value) {
                               if (value!.isEmpty) {
                                 return 'กรุณากรอกรหัสผู้รับเครื่อง';
@@ -414,11 +442,20 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                             keyboardType: TextInputType.text,
                             autocorrect: false,
                           ),
-                          Text(
-                            'กำหนดวันที่คืน: ${mdc_date_return.text ?? "กรุณาเลือกวันที่คืน"}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
+                          Row(
+                            children: [
+                              const Text(
+                                "*",
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.red),
+                              ),
+                              Text(
+                                'กำหนดวันที่คืน: ${mdc_date_return.text ?? "กรุณาเลือกวันที่คืน"}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             child: Row(

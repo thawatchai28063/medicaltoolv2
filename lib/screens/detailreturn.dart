@@ -41,11 +41,11 @@ class _DetailReturnState extends State<DetailReturn> {
   void getdeplist(String SN) async {
     deplist.fectdep('ALL'); // await RemoteService.fectgetdep(SN);
 
-    var healthcarevalue = 'เลือกแผนก';
-    print('TEST-object');
+    // var healthcarevalue = 'เลือกแผนก';
+    // print('TEST-object');
     // print(deplist.listdep);
 
-    myItems = deplist.listdep;
+    // myItems = deplist.listdep;
 
     print('myitem=${myItems}');
   }
@@ -69,8 +69,8 @@ class _DetailReturnState extends State<DetailReturn> {
               width: 10,
             ),
             const Text(
-              'ข้อมูลการคืน',
-              style: TextStyle(fontSize: 20),
+              'อุปกรณ์ที่สามารถยืมได้',
+              style: TextStyle(fontSize: 18),
             ),
           ],
         ),
@@ -78,31 +78,32 @@ class _DetailReturnState extends State<DetailReturn> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: DropdownSearch<String>(
-                items: myItems.map((item) => item.depname.toString()).toList(),
-                onChanged: (selected) {
-                  getreturnlist.listreturn.clear();
-                  setState(() {
-                    getreturnlist.fectgetreturn(selected!);
-                    print('getborrowlist=>${getreturnlist.listreturn.length}');
-                    // selectedDepartment = selected;
-                    // selectedCards.clear();
-                    // if (selectedDepartment != null) {
-                    //   selectedCards = _buildSelectedCards(selectedDepartment!);
-                    // }
-                  });
-                },
-                selectedItem: selectedDepartment,
-                dropdownBuilder: (context, selectedItem) {
-                  return Text(
-                    selectedItem ?? 'เลือกแผนก',
-                    style: TextStyle(fontSize: 18),
-                  );
-                },
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(16.0),
+            //   child: DropdownSearch<String>(
+            //     items: myItems.map((item) => item.depname.toString()).toList(),
+            //     onChanged: (selected) {
+            //       getreturnlist.listreturn.clear();
+            //       setState(() {
+            //         getreturnlist.fectgetreturn(selected!);
+            //         print('getborrowlist=>${getreturnlist.listreturn.length}');
+            //         // selectedDepartment = selected;
+            //         // selectedCards.clear();
+            //         // if (selectedDepartment != null) {
+            //         //   selectedCards = _buildSelectedCards(selectedDepartment!);
+            //         // }
+            //       });
+            //     },
+            //     selectedItem: selectedDepartment,
+            //     dropdownBuilder: (context, selectedItem) {
+            //       return Text(
+            //         selectedItem ?? 'เลือกแผนก',
+            //         style: TextStyle(fontSize: 18),
+            //       );
+            //     },
+            //   ),
+            // ),
+
             // if (selectedDepartment != null) ...selectedCards,
             Obx(() => getreturnlist.listreturn.isNotEmpty
                 ? ListView.builder(
@@ -146,7 +147,7 @@ class _DetailReturnState extends State<DetailReturn> {
                     ),
                   ),
                   Text(
-                    'หมายเลขเครื่อง :',
+                    'หมายเลขครุภัณฑ์ :',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

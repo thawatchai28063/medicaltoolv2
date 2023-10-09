@@ -75,7 +75,7 @@ class _DetailPageState extends State<DetailRPage> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Text('ข้อมูลการคืน', style: TextStyle(fontSize: 24)),
+                  Text('ข้อมูลอุปกรณ์', style: TextStyle(fontSize: 24)),
                   SizedBox(height: 20),
                   Divider(),
                   InfoRow(
@@ -95,7 +95,7 @@ class _DetailPageState extends State<DetailRPage> {
                   ),
                   Divider(),
                   InfoRow(
-                    title: 'ครุภัณฑ์:',
+                    title: 'หมายเลขครุภัณฑ์:',
                     value:
                         detailList!.isEmpty ? '' : detailList![0].mdcCd ?? '',
                     // isCentered: true,
@@ -136,12 +136,12 @@ class _DetailPageState extends State<DetailRPage> {
                         : detailList![0].mdcYeeho ?? '',
                     // isCentered: true,
                   ),
-                  // Divider(),
-                  // InfoRow(
-                  //   title: 'แผนก:',
-                  //   value: storage.read('mdcDep') ?? '',
-                  //   // isCentered: true,
-                  // ),
+                  Divider(),
+                  InfoRow(
+                    title: 'แผนก:',
+                    value: 'เครื่องมือแพทย์' ?? '',
+                    // isCentered: true,
+                  ),
                   Divider(),
                   InfoRow(
                     title: 'อาคาร:',
@@ -166,11 +166,17 @@ class _DetailPageState extends State<DetailRPage> {
                     // isCentered: true,
                   ),
                   Divider(),
+                  // InfoRow(
+                  //   title: 'สถานภาพสินทรัพย์:',
+                  //   value: detailList!.isEmpty
+                  //       ? ''
+                  //       : detailList![0].mdcStsName ?? '',
+                  //   // isCentered: true,
+                  // ),
+                  // Divider(),
                   InfoRow(
-                    title: 'สถานภาพสินทรัพย์:',
-                    value: detailList!.isEmpty
-                        ? ''
-                        : detailList![0].mdcStsName ?? '',
+                    title: 'สถานะ:',
+                    value: 'พร้อมใช้งาน' ?? '',
                     // isCentered: true,
                   ),
                   Divider(),

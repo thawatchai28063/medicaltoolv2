@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:medicaltoolv2/model/model_dep.dart';
 import 'package:medicaltoolv2/model/UserModel.dart';
 import '../model/MdcModel.dart';
+import '../model/model_depv2.dart';
 import '../model/model_get.dart';
 import '../utility/api_domain.dart';
 import 'dart:convert';
@@ -38,7 +39,7 @@ class RemoteService {
   }
 
 //แผนก
-  static Future<List<ModelDep>?> fectgetdep(String sn) async {
+  static Future<List<Modeldepv2>?> fectgetdep(String sn) async {
     Map<String, String> queryParam = {
       'SN': sn,
     };
@@ -51,7 +52,7 @@ class RemoteService {
       var jsonString = respon.body;
       if (jsonString != 'null') {
         //print(jsonString);
-        return modelDepFromJson(jsonString);
+        return modeldepv2FromJson(jsonString);
       } else {
         return null;
       }

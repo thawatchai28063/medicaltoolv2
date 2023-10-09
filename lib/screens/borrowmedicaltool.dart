@@ -51,7 +51,7 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
     mdc_name.text = storage.read('mdcName') ?? '';
     //mdc_name.text = 'TEst';
     print('mdc_name$mdc_name');
-    mdc_dep.text = storage.read('mdcDep') ?? '';
+    // mdc_dep.text = storage.read('mdcDep') ?? '';
     mdc_id.text = storage.read('mdcDoc') ?? '';
     mdc_run.text = storage.read('mdcRun') ?? '';
     mdc_yeeho.text = storage.read('mdcYeeho') ?? '';
@@ -174,13 +174,21 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                     const SizedBox(
                       height: 5,
                     ),
-                    const Text(
-                      "แผนก:",
-                      style: TextStyle(fontSize: 20),
+                    Row(
+                      children: [
+                        const Text(
+                          "*",
+                          style: TextStyle(fontSize: 20, color: Colors.red),
+                        ),
+                        const Text(
+                          "แผนกที่ยืม:",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        hintText: 'กรุณากรอกชื่อแผนก',
+                        hintText: 'กรุณากรอกชื่อแผนกที่ยืม',
                         contentPadding: const EdgeInsets.all(20.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
@@ -277,9 +285,17 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                     const SizedBox(
                       height: 5,
                     ),
-                    const Text(
-                      "เหตุผลในการยืม:",
-                      style: TextStyle(fontSize: 20),
+                    Row(
+                      children: [
+                        const Text(
+                          "*",
+                          style: TextStyle(fontSize: 20, color: Colors.red),
+                        ),
+                        const Text(
+                          "เหตุผลในการยืม:",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
                     ),
                     TextFormField(
                       decoration: InputDecoration(
@@ -328,6 +344,7 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                               ),
                             ),
                             controller: mdc_sendem_name,
+                            enabled: false,
                             validator: ((value) {
                               if (value!.isEmpty) {
                                 return 'กรุณากรอกชื่อผู้ส่ง';
@@ -350,6 +367,7 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                               ),
                             ),
                             controller: mdc_sendem_cd,
+                            enabled: false,
                             onChanged: (value) {
                               // val_search = value;
                               checkuser(value);
@@ -364,17 +382,26 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                             autocorrect: false,
                           ),
                           Text(
-                            "เจ้าหน้าที่แผนก",
+                            "เจ้าหน้าที่แผนกที่ยืม",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
-                          const Text(
-                            "ชื่อผู้รับ",
-                            style: TextStyle(fontSize: 20),
+                          Row(
+                            children: [
+                              const Text(
+                                "*",
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.red),
+                              ),
+                              const Text(
+                                "ชื่อผู้รับเครื่อง",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
                           ),
                           TextFormField(
                             decoration: InputDecoration(
-                              hintText: 'กรุณากรอกชื่อผู้รับ',
+                              hintText: 'กรุณากรอกชื่อผู้รับเครื่อง',
                               contentPadding: const EdgeInsets.all(20.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -390,13 +417,22 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                             keyboardType: TextInputType.text,
                             autocorrect: false,
                           ),
-                          const Text(
-                            "รหัสผู้รับ",
-                            style: TextStyle(fontSize: 20),
+                          Row(
+                            children: [
+                              const Text(
+                                "*",
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.red),
+                              ),
+                              const Text(
+                                "รหัสพนักงานผู้รับเครื่อง",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
                           ),
                           TextFormField(
                             decoration: InputDecoration(
-                              hintText: 'กรุณากรอกรหัสผู้รับ',
+                              hintText: 'กรุณากรอกรหัสผู้รับเครื่อง',
                               contentPadding: const EdgeInsets.all(20.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -412,11 +448,20 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                             keyboardType: TextInputType.text,
                             autocorrect: false,
                           ),
-                          Text(
-                            'วันที่ยืม: ${mdc_now.text ?? "กรุณาเลือกวันที่ยืม"}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
+                          Row(
+                            children: [
+                              const Text(
+                                "*",
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.red),
+                              ),
+                              Text(
+                                'วันที่ยืม: ${mdc_now.text ?? "กรุณาเลือกวันที่ยืม"}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             child: Row(
@@ -447,11 +492,20 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                               ],
                             ),
                           ),
-                          Text(
-                            'กำหนดวันที่คืน: ${mdc_date_return.text ?? "กรุณาเลือกวันที่คืน"}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
+                          Row(
+                            children: [
+                              const Text(
+                                "*",
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.red),
+                              ),
+                              Text(
+                                'กำหนดวันที่คืน: ${mdc_date_return.text ?? "กรุณาเลือกวันที่คืน"}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             child: Row(

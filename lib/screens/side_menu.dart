@@ -80,7 +80,7 @@ class _SideMenuState extends State<SideMenu> {
                   MaterialPageRoute(builder: (context) => BorrowMedicalTool()));
             },
           ),
-          // Divider(),
+          Divider(),
           ListTile(
             leading: Icon(
               Icons.content_paste_go,
@@ -96,7 +96,7 @@ class _SideMenuState extends State<SideMenu> {
                   MaterialPageRoute(builder: (context) => ReturnMedicalTool()));
             },
           ),
-          // Divider(),
+          Divider(),
           ListTile(
             leading: Icon(
               Icons.content_paste_search,
@@ -127,9 +127,14 @@ class _SideMenuState extends State<SideMenu> {
           //         .push(MaterialPageRoute(builder: (context) => SetTingPage()));
           //   },
           // ),
+          // SizedBox(
+          //   height: 40,
+          // ),
+          Divider(),
           SizedBox(
-            height: 40,
+            height: 200,
           ),
+
           Divider(),
           ListTile(
             leading: Icon(

@@ -74,7 +74,7 @@ class _DetailPageState extends State<DetailPage> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Text('ข้อมูลการยืม', style: TextStyle(fontSize: 24)),
+                  Text('ข้อมูลอุปกรณ์', style: TextStyle(fontSize: 24)),
                   SizedBox(height: 20),
                   Divider(),
                   InfoRow(
@@ -94,7 +94,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   Divider(),
                   InfoRow(
-                    title: 'ครุภัณฑ์:',
+                    title: 'หมายเลขครุภัณฑ์:',
                     value:
                         detailList!.isEmpty ? '' : detailList![0].mdcCd ?? '',
                     // isCentered: true,
@@ -166,10 +166,8 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   Divider(),
                   InfoRow(
-                    title: 'สถานภาพสินทรัพย์:',
-                    value: detailList!.isEmpty
-                        ? ''
-                        : detailList![0].mdcStsName ?? '',
+                    title: 'สถานะ:',
+                    value: 'กำลังยืม' ?? '',
                     // isCentered: true,
                   ),
                   Divider(),

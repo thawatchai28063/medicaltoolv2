@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:get/get.dart';
+import 'package:medicaltoolv2/remote_service/remote_server.dart';
 import '../controller/dep_controller.dart';
 import '../controller/detail_productcon.dart';
 import '../controller/get_borrow.dart';
-import '../model/model_dep.dart';
+import '../model/model_depv2.dart';
 
 class DetailBorrow extends StatefulWidget {
   DetailBorrow({Key? key});
@@ -27,7 +28,7 @@ class _DetailBorrowState extends State<DetailBorrow> {
   List<Widget> selectedCards = [];
   final deplist = Get.put(dep_controller());
   final getborrowlist = Get.put(getborrow_controller());
-  List<ModelDep> myItems = [];
+  List<Modeldepv2> myItems = [];
 
   @override
   void initState() {
@@ -35,17 +36,20 @@ class _DetailBorrowState extends State<DetailBorrow> {
     getdeplist('ALL');
     super.initState();
     getborrowlist.fectgetborrow('ALL');
+    deplist.fectdep('ALL');
     setState(() {});
   }
 
   void getdeplist(String SN) async {
-    deplist.fectdep('ALL'); // await RemoteService.fectgetdep(SN);
+    //deplist.fectdep('ALL'); // await RemoteService.fectgetdep(SN);
 
     var healthcarevalue = 'เลือกแผนก';
     print('TEST-object');
     // print(deplist.listdep);
 
-    myItems = deplist.listdep;
+    myItems = (await RemoteService.fectgetdep('ALL'))!;
+
+    setState(() {});
 
     print('myitem=${myItems}');
   }
@@ -196,7 +200,7 @@ class _DetailBorrowState extends State<DetailBorrow> {
                     ),
                   ),
                   Text(
-                    'หมายเลขเครื่อง :',
+                    'หมายเลขครุภัณฑ์ :',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

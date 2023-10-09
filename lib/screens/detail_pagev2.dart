@@ -118,7 +118,10 @@ class _Detailv2State extends State<Detailv2> {
               ],
             ),
             SizedBox(height: 20),
-            Text('Value: $val_search'),
+            Text(
+              'Value: $val_search',
+              style: TextStyle(fontSize: 12),
+            ),
             // Text(productlist.listproduct.length.toString()),
             Container(
               child: Obx(
@@ -134,7 +137,7 @@ class _Detailv2State extends State<Detailv2> {
                               'กรอกข้อมูล หรือ Scan Barcode',
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -203,7 +206,7 @@ class _Detailv2State extends State<Detailv2> {
 
                                   Divider(),
                                   InfoRow(
-                                    title: 'ครุภัณฑ์:',
+                                    title: 'หมายเลขครุภัณฑ์:',
                                     value: productlist.listproduct[0].mdcCd
                                         .toString(),
                                     // isCentered: true,
@@ -274,14 +277,14 @@ class _Detailv2State extends State<Detailv2> {
                                         .toString(),
                                     // isCentered: true,
                                   ),
-                                  Divider(),
-                                  InfoRow(
-                                    title: 'สถานภาพสินทรัพย์:',
-                                    value: productlist.listproduct[0].mdcStsName
-                                        .toString(),
-                                    // isCentered: true,
-                                  ),
-                                  Divider(),
+                                  // Divider(),
+                                  // InfoRow(
+                                  //   title: 'สถานภาพสินทรัพย์:',
+                                  //   value: productlist.listproduct[0].mdcStsName
+                                  //       .toString(),
+                                  //   // isCentered: true,
+                                  // ),
+                                  // Divider(),
 
                                   SizedBox(
                                     height: 30,
