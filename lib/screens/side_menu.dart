@@ -130,10 +130,10 @@ class _SideMenuState extends State<SideMenu> {
           // SizedBox(
           //   height: 40,
           // ),
-          Divider(),
-          SizedBox(
-            height: 200,
-          ),
+          // Divider(),
+          // SizedBox(
+          //   height: 200,
+          // ),
 
           Divider(),
           ListTile(

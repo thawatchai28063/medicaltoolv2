@@ -25,10 +25,10 @@ class LoginPage extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: Image.asset(
-              'assets/images/img11.jpg',
-              fit: BoxFit.cover,
-            ),
+            // child: Image.asset(
+            //   'assets/images/img11.jpg',
+            //   fit: BoxFit.cover,
+            // ),
           ),
           ListView(
             padding: EdgeInsets.symmetric(horizontal: 30.0),

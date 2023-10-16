@@ -450,7 +450,7 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                                     TextStyle(fontSize: 20, color: Colors.red),
                               ),
                               Text(
-                                'กำหนดวันที่คืน: ${mdc_date_return.text ?? "กรุณาเลือกวันที่คืน"}',
+                                'วันที่คืน: ${mdc_date_return.text ?? "กรุณาเลือกวันที่คืน"}',
                                 style: const TextStyle(
                                   fontSize: 20,
                                 ),
@@ -503,9 +503,19 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
                               ),
                             ),
                             onPressed: () async {
-                              Future<String?> success = insert();
-                              print('success$success');
-                              setState(() {});
+                              if (mdc_date_return.text == '' ||
+                                  mdc_receiveem_name.text == '' ||
+                                  mdc_receiveem_cd.text == '') {
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.error,
+                                  text: 'กรุณากรอกข้อมูลให้ครบทุกช่อง',
+                                );
+                              } else {
+                                Future<String?> success = insert();
+                                print('success$success');
+                                setState(() {});
+                              }
                             },
                           ))
                         ],
@@ -522,6 +532,15 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
   }
 
   Future<String?> insert() async {
+    // if (!formkey.currentState!.) {
+    // QuickAlert.show(
+    //   context: context,
+    //   type: QuickAlertType.error,
+    //   text: 'กรุณากรอกข้อมูลให้ครบทุกช่อง',
+    // );
+    //   // return null;
+    // }
+
     Map<String, String> queryParam = {
       'mdc_name': mdc_name.text,
       'mdc_dep': mdc_dep.text,
@@ -548,13 +567,14 @@ class _ReturnMedicalToolState extends State<ReturnMedicalTool> {
       print(jsonString);
       if (jsonString == "OK") {
         QuickAlert.show(
-            context: context,
-            type: QuickAlertType.success,
-            text: 'บันทึกสำเร็จ',
-            confirmBtnText: 'ถัดไป',
-            onConfirmBtnTap: () async {
-              Get.toNamed('/');
-            });
+          context: context,
+          type: QuickAlertType.success,
+          text: 'บันทึกสำเร็จ',
+          confirmBtnText: 'ถัดไป',
+          onConfirmBtnTap: () async {
+            Get.toNamed('/');
+          },
+        );
       }
     }
     return null;

@@ -556,9 +556,21 @@ class _BorrowMedicalToolState extends State<BorrowMedicalTool> {
                               ),
                             ),
                             onPressed: () async {
-                              Future<String?> success = insert();
-                              print('success$success');
-                              setState(() {});
+                              if (mdc_dep.text == '' ||
+                                  mdc_receiveem_name.text == '' ||
+                                  mdc_receiveem_cd.text == '' ||
+                                  mdc_now.text == '' ||
+                                  mdc_date_return.text == '') {
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.error,
+                                  text: 'กรุณากรอกข้อมูลให้ครบทุกช่อง',
+                                );
+                              } else {
+                                Future<String?> success = insert();
+                                print('success$success');
+                                setState(() {});
+                              }
                             },
                           ))
                         ],

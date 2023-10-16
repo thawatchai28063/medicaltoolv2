@@ -1,76 +1,76 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/widgets.dart';
 
-class SetTingPage extends StatefulWidget {
-  const SetTingPage({super.key});
+// class SetTingPage extends StatefulWidget {
+//   const SetTingPage({super.key});
 
-  @override
-  State<SetTingPage> createState() => _SetTingPageState();
-}
+//   @override
+//   State<SetTingPage> createState() => _SetTingPageState();
+// }
 
-class _SetTingPageState extends State<SetTingPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          toolbarHeight: 60,
-          backgroundColor: Colors.blueAccent,
-          foregroundColor: const Color.fromARGB(255, 19, 18, 18),
-          title: Row(
-            children: [
-              Icon(
-                Icons.settings, // เปลี่ยนเป็น icon ที่คุณต้องการ
-                size: 60,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Text(
-                'ตั้ ง ค่า',
-                style: TextStyle(fontSize: 30),
-              ),
-            ],
-          ),
-        ),
-        // appBar: AppBar(
-        //   automaticallyImplyLeading: true,
-        //   toolbarHeight: 60,
-        //   backgroundColor: Colors.blueAccent,
-        //   foregroundColor: Colors.white,
-        //   title: Row(
-        //     children: [
-        //       Image.asset(
-        //         'assets/images/Logo3.png',
-        //         width: 60,
-        //         height: 60,
-        //       ),
-        //       const SizedBox(
-        //         width: 10,
-        //       ),
-        //       const Text(
-        //         'ตั้ ง ค่ า',
-        //         style: TextStyle(fontSize: 20),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        body: Center(
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width *
-                  0.8, // กำหนดความกว้างสูงสุดของ Container ให้เท่ากับความกว้างของหน้าจอ
-              maxHeight: MediaQuery.of(context)
-                  .size
-                  .height, // กำหนดความสูงสูงสุดของ Container ให้เท่ากับความสูงของหน้าจอ
-            ),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/setting.JPG"),
-                fit: BoxFit.contain, // เลือก BoxFit ที่เหมาะสมกับการแสดงรูปภาพ
-              ),
-            ),
-          ),
-        ));
-  }
-}
+// class _SetTingPageState extends State<SetTingPage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         appBar: AppBar(
+//           automaticallyImplyLeading: true,
+//           toolbarHeight: 60,
+//           backgroundColor: Colors.blueAccent,
+//           foregroundColor: const Color.fromARGB(255, 19, 18, 18),
+//           title: Row(
+//             children: [
+//               Icon(
+//                 Icons.settings, // เปลี่ยนเป็น icon ที่คุณต้องการ
+//                 size: 60,
+//               ),
+//               const SizedBox(
+//                 width: 10,
+//               ),
+//               const Text(
+//                 'ตั้ ง ค่า',
+//                 style: TextStyle(fontSize: 30),
+//               ),
+//             ],
+//           ),
+//         ),
+//         // appBar: AppBar(
+//         //   automaticallyImplyLeading: true,
+//         //   toolbarHeight: 60,
+//         //   backgroundColor: Colors.blueAccent,
+//         //   foregroundColor: Colors.white,
+//         //   title: Row(
+//         //     children: [
+//         //       Image.asset(
+//         //         'assets/images/Logo3.png',
+//         //         width: 60,
+//         //         height: 60,
+//         //       ),
+//         //       const SizedBox(
+//         //         width: 10,
+//         //       ),
+//         //       const Text(
+//         //         'ตั้ ง ค่ า',
+//         //         style: TextStyle(fontSize: 20),
+//         //       ),
+//         //     ],
+//         //   ),
+//         // ),
+//         body: Center(
+//           child: Container(
+//             constraints: BoxConstraints(
+//               maxWidth: MediaQuery.of(context).size.width *
+//                   0.8, // กำหนดความกว้างสูงสุดของ Container ให้เท่ากับความกว้างของหน้าจอ
+//               maxHeight: MediaQuery.of(context)
+//                   .size
+//                   .height, // กำหนดความสูงสูงสุดของ Container ให้เท่ากับความสูงของหน้าจอ
+//             ),
+//             decoration: BoxDecoration(
+//               image: DecorationImage(
+//                 image: AssetImage("assets/images/setting.JPG"),
+//                 fit: BoxFit.contain, // เลือก BoxFit ที่เหมาะสมกับการแสดงรูปภาพ
+//               ),
+//             ),
+//           ),
+//         ));
+//   }
+// }

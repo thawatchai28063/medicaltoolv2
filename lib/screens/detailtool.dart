@@ -107,13 +107,7 @@ class _DetailPageState extends State<DetailPage> {
                     // isCentered: true,
                   ),
                   Divider(),
-                  InfoRow(
-                    title: 'แผนก:',
-                    value:
-                        detailList!.isEmpty ? '' : detailList![0].mdcDep ?? '',
-                    // isCentered: true,
-                  ),
-                  Divider(),
+
                   InfoRow(
                     title: 'หมายเลขเครื่อง:',
                     value:
@@ -141,6 +135,13 @@ class _DetailPageState extends State<DetailPage> {
                   //   value: storage.read('mdcDep') ?? '',
                   //   // isCentered: true,
                   // ),
+                  Divider(),
+                  InfoRow(
+                    title: 'แผนก:',
+                    value:
+                        detailList!.isEmpty ? '' : detailList![0].mdcDep ?? '',
+                    // isCentered: true,
+                  ),
                   Divider(),
                   InfoRow(
                     title: 'อาคาร:',
